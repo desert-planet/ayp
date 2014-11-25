@@ -1,0 +1,23 @@
+{
+	"name": "ayp",
+	"version": "0.0.0",
+	"description": "Hail Satain! A web comic promoting free though and drug use.",
+
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+
+	"dependencies": {
+		"express": "~4.9.x"
+	},
+
+	"engines": {
+		"node": "0.10.x"
+	},
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/desert-planet/ayp"
+	}
+}

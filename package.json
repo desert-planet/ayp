@@ -10,7 +10,7 @@
 
 	"dependencies": {
 		"express": "~4.10.x",
-		"node-redis": "~0.1.x",
+		"redis": "~0.12.x",
 		"coffee-script": "~1.8.x"
 	},
 

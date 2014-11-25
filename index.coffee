@@ -3,6 +3,7 @@ url = require 'url'
 
 Redis = require 'redis'
 express = require 'express'
+handlebars = require 'express-handlebars'
 bodyParser = require 'body-parser'
 
 root = path.resolve(__dirname)
@@ -24,7 +25,15 @@ redis = do (->
 ## App config
 app = express()
 app.set 'port', (process.env.PORT or 5000)
+
+
+app.set 'view engine', 'handlebars'
+app.engine 'handlebars', handlebars(defaultLayout: 'main')
+
+app.set 'views', path.resolve(root, 'views')
 app.use express.static(path.resolve(root, 'public'))
+
+
 
 # Parse JSON
 app.use(bodyParser.json(type: '*/json'))
@@ -35,7 +44,8 @@ app.get '/', (request, response) ->
     # TODO: Better error handling
     return response.status(404).send "I am literally on fire" if err
 
-    response.send "All who's pants: #{comic.url}"
+    response.render 'latest',
+      comic: comic
 
 app.post "/new/", (req, res) ->
   res.set 'Content-Type', 'application/json'

@@ -3,6 +3,7 @@ url = require 'url'
 
 Redis = require 'redis'
 express = require 'express'
+bodyParser = require 'body-parser'
 
 root = path.resolve(__dirname)
 
@@ -25,10 +26,27 @@ app = express()
 app.set 'port', (process.env.PORT or 5000)
 app.use express.static(path.resolve(root, 'public'))
 
+# Parse JSON
+app.use(bodyParser.json(type: '*/json'))
+
 ## Application routes
 app.get '/', (request, response) ->
   redis.info (err, res) ->
     response.send "All who's pants?"
+
+app.post "/new/", (req, res) ->
+  res.set 'Content-Type', 'application/json'
+  if req.body.secret != AYP_SECRET
+    return res.status(401).
+      send JSON.stringify error: "You don't know the secret."
+
+  {url, time} = req.body
+  return res.status(400).
+    send JSON.stringify(error: "Bad format") unless url && time
+
+  # TODO: Stuff image into a place
+
+  res.send JSON.stringify {ok: Date.now()}
 
 ## Boot sequence
 app.listen app.get('port'), ->

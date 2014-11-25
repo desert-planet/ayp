@@ -5,11 +5,13 @@
 
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js"
+		"start": "coffee index.js"
 	},
 
 	"dependencies": {
-		"express": "~4.9.x"
+		"express": "~4.10.x",
+		"node-redis": "~0.1.x",
+		"coffee-script": "~1.8.x"
 	},
 
 	"engines": {

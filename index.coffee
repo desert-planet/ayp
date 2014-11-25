@@ -44,10 +44,31 @@ app.post "/new/", (req, res) ->
   return res.status(400).
     send JSON.stringify(error: "Bad format") unless url && time
 
-  # TODO: Stuff image into a place
-
-  res.send JSON.stringify {ok: Date.now()}
+  (new Comic(url, time)).save (err, comic) ->
+    return res.status(500).send(JSON.stringify error: "#{err}") if err
+    res.send JSON.stringify {ok: Date.now()}
 
 ## Boot sequence
 app.listen app.get('port'), ->
   console.log "Your pants running at http://localhost:#{app.get('port')}/"
+
+## Helpers, models, "Uesr Code"
+AYP_PREFIX = "ayp:"
+
+# The Comic data model.
+class Comic
+  @prefix: AYP_PREFIX
+  @storage: -> redis
+
+  @key: () -> "#{@prefix}:comics"
+  key: -> @constructor.key()
+
+  constructor: (@url, @time, options={}) ->
+    @saved = options.saved ? false
+    @storage = options.storage ? @constructor.storage()
+
+  save: (cb=(->)) ->
+    return cb("already saved") if @saved
+    @saved = true
+    @storage.zadd [@key(), @time, @url], (err, res) ->
+      do cb(null, this)

@@ -31,8 +31,11 @@ app.use(bodyParser.json(type: '*/json'))
 
 ## Application routes
 app.get '/', (request, response) ->
-  redis.info (err, res) ->
-    response.send "All who's pants?"
+  Comic.latest (err, comic) ->
+    # TODO: Better error handling
+    return response.status(404).send "I am literally on fire" if err
+
+    response.send "All who's pants: #{comic.url}"
 
 app.post "/new/", (req, res) ->
   res.set 'Content-Type', 'application/json'
@@ -58,17 +61,21 @@ AYP_PREFIX = "ayp:"
 # The Comic data model.
 class Comic
   @prefix: AYP_PREFIX
-  @storage: -> redis
 
   @key: () -> "#{@prefix}:comics"
   key: -> @constructor.key()
 
   constructor: (@url, @time, options={}) ->
     @saved = options.saved ? false
-    @storage = options.storage ? @constructor.storage()
 
   save: (cb=(->)) ->
     return cb("already saved") if @saved
     @saved = true
-    @storage.zadd [@key(), @time, @url], (err, res) ->
-      do cb(null, this)
+    redis.zadd [@key(), @time, @url], (err, res) ->
+      cb(err, this)
+
+  @latest: (cb) ->
+    redis.zrange [@key(), -1, -1, "WITHSCORES"], (err, res) ->
+      return cb(err) if err
+      return cb(null, new Comic("http://s3.amazonaws.com/ayp/db.jpg", 0)) unless res.length > 0
+      return cb(null, new Comic(res[0], res[1], saved: true))

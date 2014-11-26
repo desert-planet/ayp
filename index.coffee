@@ -74,7 +74,7 @@ app.get '/archive/:start?', (request, response) ->
       archive = [first, comics[..-2]...]
       last = comics[comics.length - 1]
 
-      return response.render 'archive', archive: archive, last: last
+      return response.render 'archive', archive: archive, first: first, last: last
 
 app.get '/random/', (request, response) ->
   Comic.random (err, comic) =>

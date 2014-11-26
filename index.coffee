@@ -30,13 +30,13 @@ app.set 'port', (process.env.PORT or 5000)
 # Logging
 app.use morgan('short')
 
+# Set up handlebars
 app.set 'view engine', 'handlebars'
 app.engine 'handlebars', handlebars(defaultLayout: 'main')
 
+# View and static paths on disk
 app.set 'views', path.resolve(root, 'views')
 app.use '/static/', express.static(path.resolve(root, 'public'))
-
-
 
 # Parse JSON
 app.use(bodyParser.json(type: '*/json'))

@@ -5,6 +5,7 @@ Redis = require 'redis'
 express = require 'express'
 handlebars = require 'express-handlebars'
 bodyParser = require 'body-parser'
+morgan = require 'morgan'
 
 root = path.resolve(__dirname)
 
@@ -26,6 +27,8 @@ redis = do (->
 app = express()
 app.set 'port', (process.env.PORT or 5000)
 
+# Logging
+app.use morgan('short')
 
 app.set 'view engine', 'handlebars'
 app.engine 'handlebars', handlebars(defaultLayout: 'main')

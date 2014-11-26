@@ -32,7 +32,10 @@ app.use morgan('short')
 
 # Set up handlebars
 app.set 'view engine', 'handlebars'
-app.engine 'handlebars', handlebars(defaultLayout: 'main')
+app.engine 'handlebars', handlebars
+  defaultLayout: 'main'
+  helpers:
+    comicUrl: (at) -> "/at/#{at}/"
 
 # View and static paths on disk
 app.set 'views', path.resolve(root, 'views')

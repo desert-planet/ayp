@@ -11,6 +11,7 @@ root = path.resolve(__dirname)
 
 ## External configuration
 AYP_SECRET = process.env.AYP_SECRET or "That's my secret, they're all my pants."
+GA_ID = process.env.GA_ID
 
 ## The "Database"
 redis = do (->
@@ -36,6 +37,9 @@ app.engine 'handlebars', handlebars
   defaultLayout: 'main'
   helpers:
     comicUrl: (at) -> "/at/#{at}/"
+
+# App locals
+app.locals.GA_ID = GA_ID if GA_ID
 
 # View and static paths on disk
 app.set 'views', path.resolve(root, 'views')

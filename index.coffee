@@ -49,8 +49,13 @@ app.get '/', (request, response) ->
   Comic.latest (err, comic) =>
     # TODO: Better error handling
     return response.status(404).send "I am literally on fire, and I can't find the latest" if err
-
     response.render 'strip', comic: comic
+
+app.get '/random/', (request, response) ->
+  Comic.random (err, comic) =>
+    # If we fuck up, go back to /
+    return response.redirect('/') if err
+    return response.redirect("/at/#{comic.time}/")
 
 app.get '/at/:stamp', (request, response) ->
   failHome = ->
@@ -150,6 +155,16 @@ class Comic
       # and invoke `Comic#update` and pass our callback down to it
       # to be invoked whtn the structure is fully filled in
       (new Comic(res[0], stamp, saved: true)).update(cb)
+
+  @random: (cb) =>
+    redis.zcard @key, (err, count) =>
+      return cb(err) if err
+
+      pick = Math.round(Math.random() * (count - 1))
+      redis.zrange [@key(), pick, pick, 'WITHSCORES'], (err, res) =>
+        return cb(err) if err
+        [url, at] = res
+        return Comic.at(at, cb)
 
 
   # Fetch the latest comic and invoke cb as in `Comic.at`

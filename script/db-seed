@@ -1,0 +1,29 @@
+#!/usr/bin/env coffee
+
+fs = require 'fs'
+path = require 'path'
+
+ROOT = path.resolve(__dirname, '..')
+
+redis = require path.resolve(ROOT, 'lib', 'redis')
+Comic = require path.resolve(ROOT, 'lib', 'Comic')
+say = (args...) -> console.log "=> ", args...
+
+seed = JSON.parse(fs.readFileSync path.resolve(ROOT, 'seed.json')).seed
+
+redis.ping (err) ->
+  return say "I can't cont connect to redis :( Is it running?" if err
+
+  say "I'm gonna stuff your DB with some content."
+  say "It'll take less time than it took to print this message."
+
+  done = 0
+
+  for strip in seed
+    do (strip) ->
+      comic = new Comic(strip.url, strip.time)
+      comic.save (err) ->
+        done +=1
+        say "Failed to load strip:", strip if err
+
+        process.exit(0) if done == seed.length

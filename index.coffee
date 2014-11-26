@@ -6,6 +6,7 @@ express = require 'express'
 handlebars = require 'express-handlebars'
 bodyParser = require 'body-parser'
 morgan = require 'morgan'
+expressLess = require 'express-less'
 
 root = path.resolve(__dirname)
 
@@ -41,9 +42,10 @@ app.engine 'handlebars', handlebars
 # App locals
 app.locals.GA_ID = GA_ID if GA_ID
 
-# View and static paths on disk
+# View, static, and LESS paths on disk
 app.set 'views', path.resolve(root, 'views')
 app.use '/static/', express.static(path.resolve(root, 'public'))
+app.use '/style/', expressLess path.resolve(root, 'style')
 
 # Parse JSON
 app.use(bodyParser.json(type: '*/json'))

@@ -64,8 +64,6 @@ $ npm start
 Your pants running at http://localhost:5000/
 ```
 
-And you should be good to go.
-
 :warning: Code changes to `.coffee` files require a restart of the server. Because I'm bad at programming :warning:
 
 ## Setting up your fork for contribution

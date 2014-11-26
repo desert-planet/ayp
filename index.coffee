@@ -68,13 +68,18 @@ app.get '/archive/:start?', (request, response) ->
     # If we fail, redirect to the beginning of the archive
     return response.redirect("/archive/") if err
 
-    Comic.before first.time, 10, (err, comics) =>
+    Comic.before first.time, 10, (err, comicsBefore) =>
       return response.redirect("/archive/") if err
 
-      archive = [first, comics[..-2]...]
-      last = comics[comics.length - 1]
+      # We fetch the list of comics after so we can generate
+      # a "Previous" (Forward in time) archive page
+      Comic.after first.time, 10, (err, comicsAfter) =>
+        return response.redirect("/archive/") if err
 
-      return response.render 'archive', archive: archive, last: last
+        return response.render 'archive',
+          archive: [first, comicsBefore[..-2]...]
+          next: comicsBefore[comicsBefore.length - 1]
+          prev: comicsAfter[comicsAfter.length - 1]
 
 app.get '/random/', (request, response) ->
   Comic.random (err, comic) =>
@@ -191,7 +196,18 @@ class Comic
         return Comic.at(at, cb)
 
   @before: (stamp, count, cb) =>
-    redis.zrevrangebyscore [@key(), (stamp - 1), -1, "WITHSCORES", "LIMIT", 0, count], (err, res) ->
+    redis.zrevrangebyscore [@key(), (stamp - 1), '-inf', "WITHSCORES", "LIMIT", 0, count], (err, res) ->
+      return cb(err) if err
+
+      # Transform the list into lazy objects.
+      comics = []
+      for i in [0...res.length] by 2
+        comics.push new Comic(res[i], res[i+1], saved: true)
+
+      cb(undefined, comics)
+
+  @after: (stamp, count, cb) =>
+    redis.zrangebyscore [@key(), (stamp + 1), '+inf', "WITHSCORES", "LIMIT", 0, count], (err, res) ->
       return cb(err) if err
 
       # Transform the list into lazy objects.

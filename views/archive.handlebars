@@ -1,5 +1,10 @@
 Archive .... WWEEEEEEEE
 
+{{#if prev}}
+<a href="/archive/{{prev.time}}/" title="Prev Archive">Previous page of archive</a>
+{{/if}}
+
+
 {{#each archive}}
 <div class="archive">
 	 <a href="{{ comicUrl this.time }}" title="{{ this.time }}">
@@ -8,6 +13,6 @@ Archive .... WWEEEEEEEE
 </div>
 {{/each}}
 
-{{#if last}}
-<a href="/archive/{{last.time}}/" title="Next Page">Next page of archives</a>
+{{#if next}}
+<a href="/archive/{{next.time}}/" title="Next Page">Next page of archives</a>
 {{/if}}

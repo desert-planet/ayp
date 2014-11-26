@@ -23,7 +23,10 @@ This will install both of the requirements. The remaining requirements will be i
   * We use [LESS](http://lesscss.org/) as the CSS language, and CSS is stored in [/style](./style) in the repository
   * We use [Handlebars](http://handlebarsjs.com/) templates, in [/views](./views) running inside the `main` layout in
   [/views/layouts](./views/layouts)
+  * Handlebars integration is provided with the [express-handlebars](https://www.npmjs.org/package/express-handlebars) package
   * Anything placed in [/public](./public) is accessible on the site as `/static/..`
+  * The (production site)[http://ayp.wtf.cat/] runs in [Heroku](https://www.heroku.com/)
+  * :cat2: Planet
 
 That's about it. If something is stupid or confusing, **FILE A FUCKING ISSUE** so that it can get fixed.
 

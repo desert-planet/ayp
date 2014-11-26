@@ -31,7 +31,7 @@ app.set 'view engine', 'handlebars'
 app.engine 'handlebars', handlebars(defaultLayout: 'main')
 
 app.set 'views', path.resolve(root, 'views')
-app.use express.static(path.resolve(root, 'public'))
+app.use '/static/', express.static(path.resolve(root, 'public'))
 
 
 
@@ -44,8 +44,17 @@ app.get '/', (request, response) ->
     # TODO: Better error handling
     return response.status(404).send "I am literally on fire" if err
 
-    response.render 'latest',
-      comic: comic
+    response.render 'strip', comic: comic
+
+app.get '/at/:stamp', (request, response) ->
+  failHome = ->
+    return response.redirect('/')
+  return failHome() if isNaN(stamp = parseInt(request.params.stamp))
+
+  Comic.at stamp, (err, comic) ->
+    return failHome() if err
+
+    response.render 'strip', comic: comic
 
 app.post "/new/", (req, res) ->
   res.set 'Content-Type', 'application/json'
@@ -83,6 +92,16 @@ class Comic
     @saved = true
     redis.zadd [@key(), @time, @url], (err, res) ->
       cb(err, this)
+
+  # Return a comic stamped at `stamp` to caller by
+  # invoking callback as `cb(err, Comic)` if it is found.
+  # `err` will be set otherwise
+  @at: (stamp, cb) ->
+    redis.zrangebyscore [@key(), stamp, stamp], (err, res) ->
+      return cb(err) if err
+      return cb("Not found") unless res.length > 0
+      cb(null, new Comic(res[0], stamp, saved: true))
+
 
   @latest: (cb) ->
     redis.zrange [@key(), -1, -1, "WITHSCORES"], (err, res) ->

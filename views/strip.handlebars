@@ -1,0 +1,11 @@
+<h1>Look at this with your special eyes</h1>
+
+<img src="{{ comic.url }}" alt="{{ comic.time }}" />
+
+{{#if comic.prev}}
+  <a href="{{ comicUrl comic.prev }}" alt="Prev">Prev</a>
+{{/if}}
+
+{{#if comic.next}}
+  <a href="{{ comicUrl comic.next }}" alt="Next">Next</a>
+{{/if}}

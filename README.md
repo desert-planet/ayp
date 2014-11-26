@@ -27,7 +27,7 @@ $ cd ayp
 $ git remote rename origin upstream
 ```
 
-Now use [npm](https://www.npmjs.org/) which should have been installed with node to install the application
+Now use [npm](https://www.npmjs.org/), which should have been installed with node, to install the application
 and all of its dependencies.
 
 ```sh

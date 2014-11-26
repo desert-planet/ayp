@@ -132,7 +132,7 @@ class Comic
     # the arguments have to be floats :rage4:
     redis.zrangebyscore [@key(), "#{@time + 1}", '+inf', 'WITHSCORES', 'LIMIT', 0, 1], finish (res) =>
         @next = res[1] || null
-    redis.zrangebyscore [@key(), '-inf', "#{@time - 1}", 'WITHSCORES', 'LIMIT', 0, 1], finish (res) =>
+    redis.zrevrangebyscore [@key(), "#{@time - 1}", '-inf', 'WITHSCORES', 'LIMIT', 0, 1], finish (res) =>
         @prev = res[1] || null
 
   # Return a comic stamped at `stamp` to caller by

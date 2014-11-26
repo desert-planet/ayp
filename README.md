@@ -16,6 +16,14 @@ $ brew install node
 
 This will install both of the requirements. The remaining requirements will be installed by the application layer.
 
+## Tech Stack and Tech Stack Accessories
+
+![fun](http://pixxx.wtf.cat/image/3F1M3J3o0h3L/fun.jpg)
+
+  * We use [LESS](http://lesscss.org/) as the CSS language, and CSS is stored in [/style](./style) in the repository
+  * We use [Handlebars](http://handlebarsjs.com/) templates, in [/views](./views) running inside the `main` layout in
+    [/views/layouts](./views/layouts)
+
 ## Local development
 
 First, clone the repository, and set the name of the remote to `upstream`. This will become useful

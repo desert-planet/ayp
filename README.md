@@ -39,6 +39,7 @@ If nothing goes wrong, you can then load the local database with some test strip
 ```sh
 $ script/db-seed
 =>  I'm gonna stuff your DB with some content.
+[..snip..]
 ```
 
 Now you're **GOOD TO GO**. To run the development server

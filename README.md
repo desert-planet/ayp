@@ -25,7 +25,7 @@ This will install both of the requirements. The remaining requirements will be i
   [/views/layouts](./views/layouts)
   * Handlebars integration is provided with the [express-handlebars](https://www.npmjs.org/package/express-handlebars) package
   * Anything placed in [/public](./public) is accessible on the site as `/static/..`
-  * The (production site)[http://ayp.wtf.cat/] runs in [Heroku](https://www.heroku.com/)
+  * The [production site](http://ayp.wtf.cat/) runs in [Heroku](https://www.heroku.com/)
   * :cat2: Planet
 
 That's about it. If something is stupid or confusing, **FILE A FUCKING ISSUE** so that it can get fixed.

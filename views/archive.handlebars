@@ -1,0 +1,13 @@
+Archive .... WWEEEEEEEE
+
+{{#each archive}}
+<div class="archive">
+	 <a href="{{ comicUrl this.time }}" title="{{ this.time }}">
+	   <img src="{{ this.url }}" alt="{{ this.time }}" />
+	 </a>
+</div>
+{{/each}}
+
+{{#if last}}
+<a href="/archive/{{last.time}}/" title="Next Page">Next page of archives</a>
+{{/if}}

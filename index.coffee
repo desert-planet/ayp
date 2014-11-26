@@ -55,6 +55,27 @@ app.get '/', (request, response) ->
     return response.status(404).send "I am literally on fire, and I can't find the latest" if err
     response.render 'strip', comic: comic
 
+app.get '/archive/:start?', (request, response) ->
+  # Select either the latest (if start is nonsense or missing)
+  # or the Comic specifed at `start` to begin the archive page
+  start = parseInt(request.params.start)
+  if isNaN(start)
+    fetch = (cb) -> Comic.latest(cb)
+  else
+    fetch = (cb) -> Comic.at(start, cb)
+
+  fetch (err, first) =>
+    # If we fail, redirect to the beginning of the archive
+    return response.redirect("/archive/") if err
+
+    Comic.before first.time, 10, (err, comics) =>
+      return response.redirect("/archive/") if err
+
+      archive = [first, comics[..-2]...]
+      last = comics[comics.length - 1]
+
+      return response.render 'archive', archive: archive, last: last
+
 app.get '/random/', (request, response) ->
   Comic.random (err, comic) =>
     # If we fuck up, go back to /
@@ -168,6 +189,17 @@ class Comic
         return cb(err) if err
         [url, at] = res
         return Comic.at(at, cb)
+
+  @before: (stamp, count, cb) =>
+    redis.zrevrangebyscore [@key(), (stamp - 1), -1, "WITHSCORES", "LIMIT", 0, count], (err, res) ->
+      return cb(err) if err
+
+      # Transform the list into lazy objects.
+      comics = []
+      for i in [0...res.length] by 2
+        comics.push new Comic(res[i], res[i+1], saved: true)
+
+      cb(undefined, comics)
 
 
   # Fetch the latest comic and invoke cb as in `Comic.at`

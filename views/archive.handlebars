@@ -1,0 +1,18 @@
+Archive .... WWEEEEEEEE
+
+{{#if prev}}
+<a href="/archive/{{prev.time}}/" title="Prev Archive">Previous page of archive</a>
+{{/if}}
+
+
+{{#each archive}}
+<div class="archive">
+	 <a href="{{ comicUrl this.time }}" title="{{ this.time }}">
+	   <img src="{{ this.url }}" alt="{{ this.time }}" />
+	 </a>
+</div>
+{{/each}}
+
+{{#if next}}
+<a href="/archive/{{next.time}}/" title="Next Page">Next page of archives</a>
+{{/if}}

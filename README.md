@@ -14,7 +14,7 @@ $ brew install redis
 $ brew install node
 ```
 
-To install both of them. The remaining requirements will be installed by the application layer.
+This will install both of the requirements. The remaining requirements will be installed by the application layer.
 
 ## Local development
 

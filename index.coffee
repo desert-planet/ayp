@@ -157,9 +157,8 @@ class Comic
       (new Comic(res[0], stamp, saved: true)).update(cb)
 
   @random: (cb) =>
-    redis.zcard @key, (err, count) =>
+    redis.zcard @key(), (err, count) =>
       return cb(err) if err
-
       pick = Math.round(Math.random() * (count - 1))
       redis.zrange [@key(), pick, pick, 'WITHSCORES'], (err, res) =>
         return cb(err) if err

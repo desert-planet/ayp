@@ -9,8 +9,8 @@ AYP_SECRET = process.env.AYP_SECRET or "That's my secret, they're all my pants."
 GA_ID      = process.env.GA_ID
 
 ## Load and configure the app
-app = rek '/lib/app'
-Comic = rek '/lib/comic'
+app = rek 'lib/app'
+Comic = rek 'lib/comic'
 
 app.locals.GA_ID = GA_ID
 app.set 'port', (process.env.PORT or 5000)

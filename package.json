@@ -2,10 +2,8 @@
 	"name": "ayp",
 	"version": "0.0.0",
 	"description": "Hail Satain! A web comic promoting free though and drug use.",
-
-	"main": "index.js",
 	"scripts": {
-		"start": "coffee index.coffee"
+		"start": "coffee server.coffee"
 	},
 
 	"dependencies": {

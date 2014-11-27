@@ -8,7 +8,7 @@
 
   <div class="pn">
 {{#if comic.prev}}
-  <a href="{{ comicUrl comic.prev }}" alt="Prev" class="prev">Prev</a>
+  <a href="{{ comicUrl comic.prev }}" alt="Prev" id="prev" class="nav-prev"><i class="icon-left-open icon"></i></a>
 {{/if}}
   </div><!--.pn-->
 
@@ -20,7 +20,7 @@
 
   <div class="pn">
 {{#if comic.next}}
-  <a href="{{ comicUrl comic.next }}" alt="Next" class="next">Next</a>
+  <a href="{{ comicUrl comic.next }}" alt="Next" id="next" class="nav-next"><i class="icon-right-open icon"></i></a>
 {{/if}}
   </div><!--.pn-->
 </div><!--#nav.strip-->

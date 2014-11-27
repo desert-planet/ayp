@@ -1,0 +1,8 @@
+
+.icon-star:before { content: '\e800'; } /* '' */
+.icon-left-open:before { content: '\e801'; } /* '' */
+.icon-right-open:before { content: '\e802'; } /* '' */
+.icon-rss:before { content: '\e803'; } /* '' */
+.icon-github-circled:before { content: '\e804'; } /* '' */
+.icon-github:before { content: '\e805'; } /* '' */
+.icon-shuffle:before { content: '\e806'; } /* '' */

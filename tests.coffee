@@ -1,7 +1,19 @@
 assert = require 'assert'
+http = require 'http'
+server = require './server'
+port = 5000
 
-skittlebob = 'love'
+getGetOptions = (path) ->
+  options = {
+    "host": "localhost",
+    "port": port,
+    "path": path,
+    "method": "GET"
+  }
+  return options
 
-describe 'skittlebob', ->
-  it 'is love', ->
-    assert skittlebob == 'love'
+describe 'server', ->
+  it 'just works', ->
+    headers = getGetOptions '/'
+    http.get headers, (res) ->
+      assert res.statusCode == 200

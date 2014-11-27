@@ -6,7 +6,6 @@ express = require 'express'
 handlebars = require 'express-handlebars'
 bodyParser = require 'body-parser'
 morgan = require 'morgan'
-expressLess = require 'express-less'
 favicon = require 'serve-favicon'
 mincer = require 'mincer'
 

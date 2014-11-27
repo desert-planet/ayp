@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $0 == $BASH_SOURCE ]; then
 	echo "=> NO! BAD! Run '. $0' instead"

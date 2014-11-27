@@ -1,5 +1,4 @@
-rek = require 'rekuire'
-redis = rek 'lib/redis-connection'
+redis = require './redis-connection'
 
 # The Comic data model.
 module.exports = class Comic

@@ -8,6 +8,7 @@ bodyParser = require 'body-parser'
 morgan = require 'morgan'
 expressLess = require 'express-less'
 favicon = require 'serve-favicon'
+mincer = require 'mincer'
 
 ## Set up the app
 module.exports = app = express()
@@ -25,10 +26,14 @@ app.engine 'handlebars', handlebars
 # View, static, and LESS paths on disk
 app.set 'views', path.resolve(ROOT, 'views')
 app.use '/static/', express.static(path.resolve(ROOT, 'public'))
-app.use '/style/', expressLess path.resolve(ROOT, 'assets', 'style')
 
 # The most important thing of all.The /favicon.ico handler
 app.use favicon(path.resolve(ROOT, 'public', 'favicon.ico'))
+
+# Handle assets with mincer.
+mincerEnv = new mincer.Environment();
+mincerEnv.appendPath path.resolve(ROOT, 'assets')
+app.use '/assets', mincer.createServer(mincerEnv)
 
 # Parse JSON
 app.use(bodyParser.json(type: '*/json'))

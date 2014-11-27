@@ -11,7 +11,18 @@ $(document).ready(function () {
       else if (e.which == 39) {  // Right arrow key code
         url = $('#next').attr('href');
       }
+      else if (e.which == 65) {  // A key code
+        url = $('.archive').attr('href');
+      }
+      else if (e.which == 72) {  // H key code
+        url = $('.home').attr('href');
+      }
+      else if (e.which == 82) {  // R key code
+        url = $('.random').attr('href');
+      }
       if (url) {
         window.location = url;
       }
-    }); });
+    });
+
+});

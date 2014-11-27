@@ -1,3 +1,181 @@
-body {
-	background: salmon;
+/* 	AYP Version 2 CSS by solios, who is full of WordPress habits. */
+
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com - It works(tm).
+You know what they say about assumptions.
+They make an ass out of u and mptions. */
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+html {
+	font-family: helvetica, arial, sans-serif;
+	background-image: url("/static/images/ayp_background_scaled.jpg");
+	background-attachment: fixed;
+	height: 100%;
+	line-height: 0;
+	color: white;
+}
+
+a {
+	color: white;
+	text-decoration :none;
+	font-weight: bold;
+	-o-transition:.4s;
+	-ms-transition:.4s;
+	-moz-transition:.4s;
+	-webkit-transition:.4s;
+}
+
+a:hover {
+	/* color: #f65404;  Same color as AYP header graphic. */
+	color: orange;
+}
+
+body { height: 100%; }
+
+#flavor {
+	/* It's not stupid, it's advanced! */
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		/* seriously ugly; seriously necessary. */
+	background: rgba(0,0,0,0.7); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.7)), color-stop(100%,rgba(0,0,0,0.0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(0,0,0,0.7)', endColorstr='rgba(0,0,0,0.0)',GradientType=0 ); /* IE6-9 */
+	height: 100%;
+	background-attachment: fixed;
+
+}
+
+
+::selection		{
+	background:#333; color: #ccc;  /* Safari and Opera */
+}
+
+::-moz-selection 	{
+	background:#333; color: #ccc;  /* Firefox */
+}
+
+/* Brown scrollbar in Chrome. */
+
+::-webkit-scrollbar {
+	width: 14px;
+}
+
+::-webkit-scrollbar-track {
+	border-radius: 0px;
+	background-color: #222;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 0px;
+	background-color: #634c38;
+}
+
+
+::-webkit-scrollbar-thumb:active {
+	border-radius: 0px;
+	background-color: #8a6a4f;
+}
+
+::-webkit-scrollbar-corner    { background-color: #646464; color: #c8c8c8; }
+::-webkit-resizer 	{ background-color: #646464; color:#c8c8c8; }
+
+
+#ayp {
+	min-height: 100%;
+	position: relative;
+	margin: 0 auto;
+	width: 1120px;
+  	overflow: hidden; }
+
+
+
+#header {
+	width: 970px;
+	margin: 0 auto;
+	padding: 20px;
+	height: 100px;
+}
+
+#header h1 a {
+	width: 220px;
+	height: 112px;
+	background-image: url("/static/images/ayp_2-line.png");
+	display: block;
+	float: left;
+	margin-right: 20px;
+	text-indent: -10000px;
+}
+
+.header-box {
+	line-height: 0px;
+	margin-top: 10px;
+}
+
+#content {
+	margin-top: 10px;
+	margin-bottom: 70px; /* Eyeball against #footer */
+}
+
+#page {
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 12px rgba(0,0,0,0.7);
+	margin-bottom: 10px;
+}
+
+
+.page-archive #comic { margin-bottom: 20px; }
+
+.page-archive #comic:last-child { margin-bottom: 0px; }
+
+
+#comic {
+	height: 360px;
+	background-color: #eee;
+	/* This forces the correct page size in the event of slow images,
+	and gives the reader something to look at while strips load. */
+}
+
+#nav {
+	text-align: center;
+	padding: 10px;
+	font-size: 18px;
+	text-shadow: 0px 2px 4px rgba(0,0,0,0.7)
+}
+
+#nav.top { margin-bottom: 10px; padding-top: 0px; }
+
+#nav.bottom a { margin: 0px 8px; }
+
+#nav .pn {
+	display: inline-block;
+	width: 41px; /* This is the computed width in Chrome;
+	setting the width keeps the front page navbar aligned
+	correctly, accounting for the lack of a "next" there,
+	as well as a lack of a "previous" on the first page of
+	the comic archive.  IF YOU CAN FIND IT! */
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 1080px;
+	padding: 10px;
+	display: block;
+	margin: 0 auto;
+}
+
+#footer p {
+	text-shadow: 0px 1px 2px rgba(0,0,0,0.75);
+	text-align: center;
+	font-size: 14px;
+	line-height: 24px;
 }

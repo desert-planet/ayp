@@ -1,18 +1,21 @@
-Archive .... WWEEEEEEEE
-
 {{#if prev}}
-<a href="/archive/{{prev.time}}/" title="Prev Archive">Previous page of archive</a>
+<div id="nav" class="archive top">
+<a href="/archive/{{prev.time}}/" title="Previous page of strips" id="prev" class="nav-prev"><i class="icon-left-open icon"></i> Previous page of strips</a>
+</div><!--#nav.archive top-->
 {{/if}}
 
-
+<div id="page" class="page-archive">
 {{#each archive}}
-<div class="archive">
+<div id="comic" class="archive">
 	 <a href="{{ comicUrl this.time }}" title="{{ this.time }}">
 	   <img src="{{ this.url }}" alt="{{ this.time }}" />
 	 </a>
-</div>
+</div><!--#comic.archive-->
 {{/each}}
+</div><!--#page-->
 
 {{#if next}}
-<a href="/archive/{{next.time}}/" title="Next Page">Next page of archives</a>
+<div id="nav" class="archive bottom">
+<a href="/archive/{{next.time}}/" title="Next page of strips" id="next" class="nav-next">Next page of strips <i class="icon-right-open icon"></i></a>
+</div><!--#nav.archive bottom-->
 {{/if}}

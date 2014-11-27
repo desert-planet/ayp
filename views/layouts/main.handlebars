@@ -1,30 +1,53 @@
-<!html>
+<!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 	<title>All Your Pants</title>
-	<link rel="stylesheet" href="/assets/css/main.css" type="text/css" media="screen">
-  </head>
+
+  <link rel="Shortcut Icon" href="/static/favicon.ico" type="image/x-icon" /><!-- Feel free to remove this. -->
+
+    <link rel="stylesheet" href="/assets/css/main.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" meida="all" href="/static/fonts/css/fontello.css" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- External per Muta_work's request. -->
+    <script type='text/javascript' src='/assets/js/nav.js'></script>
+    <!-- Why does seemingly trivial .js require jquery?  I don't want to know. -->
+
+    </head>
   <body>
-	{{#if GA_ID}}
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', '{{ GA_ID }}', 'auto');
-	  ga('send', 'pageview');
-	</script>
-	{{/if}}
-
+    <div id="flavor"></div><!--Where the #flavor is.-->
+    <div id="ayp">
 	<div id="header">
-	  <a href="/" title="Home/Latest">ALL YOUR PANTS</a> -- Look at this
-	</div>
+    <h1><a href="/" title="All Your Pants: Home/Latest">All Your Pants</a></h1>
+    <div class="header-box">
+      <a href="http://amongthechosen.com/" title="Among the Chosen"><img src="/static/images/ayp_atc.jpg"></a>
+    </div><!--.header-box-->
+	</div><!--#header-->
+
 	<div id="content">
 	  {{{body}}}
-	</div>
+	</div><!--#ayp-->
+
 	<div id="footer">
-	  I'm pretty sure someone made this
-	</div>
+    <p>AYP v2 built by #arrakis (mostly <a href="http://wtf.cat/" title="wtf.cat">Muta_work</a>).  Initial graphics and CSS by <a href="http://amongthechosen.com/" title="Among the Chosen">solios</a>.</p>
+    <p>Based on <a href="http://ayp.crashnet.org/" title="All Your Pants">AYP v1</a> by <a href="http://liepins.de/" title="liepins.de">_Lasar</a>.</p>
+	</div><!--#footer-->
+</div><!--#page-->
+<!-- Moved from up top.  -->
+
+  {{#if GA_ID}}
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{{ GA_ID }}', 'auto');
+  ga('send', 'pageview');
+  </script>
+  {{/if}}
+
   </body>
 </html>

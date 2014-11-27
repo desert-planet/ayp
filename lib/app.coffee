@@ -7,6 +7,7 @@ handlebars = require 'express-handlebars'
 bodyParser = require 'body-parser'
 morgan = require 'morgan'
 expressLess = require 'express-less'
+favicon = require 'serve-favicon'
 
 ## Set up the app
 module.exports = app = express()
@@ -25,6 +26,9 @@ app.engine 'handlebars', handlebars
 app.set 'views', path.resolve(ROOT, 'views')
 app.use '/static/', express.static(path.resolve(ROOT, 'public'))
 app.use '/style/', expressLess path.resolve(ROOT, 'style')
+
+# The most important thing of all.The /favicon.ico handler
+app.use favicon(path.resolve(ROOT, 'public', 'favicon.ico'))
 
 # Parse JSON
 app.use(bodyParser.json(type: '*/json'))

@@ -22,7 +22,7 @@ This will install both of the requirements. The remaining requirements will be i
 
 ![fun](http://pixxx.wtf.cat/image/3F1M3J3o0h3L/fun.jpg)
 
-  * We use [LESS](http://lesscss.org/) as the CSS language, and CSS is stored in [/assets/style](./assets/style) in the repository, served at `http://...../style/main.css`
+  * We use [Sass](http://sass-lang.com/) as the CSS language, and CSS is stored in [/assets/style](./assets/style) in the repository, served at `http://...../assets/css/main.css`
   * We use [Handlebars](http://handlebarsjs.com/) templates, in [/views](./views) running inside the `main` layout in
   [/views/layouts](./views/layouts)
   * Handlebars integration is provided with the [express-handlebars](https://www.npmjs.org/package/express-handlebars) package

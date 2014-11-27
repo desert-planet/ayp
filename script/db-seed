@@ -3,13 +3,11 @@
 fs = require 'fs'
 path = require 'path'
 
-ROOT = path.resolve(__dirname, '..')
-
-redis = require path.resolve(ROOT, 'lib', 'redis-connection')
-Comic = require path.resolve(ROOT, 'lib', 'comic')
+redis = require '../lib/redis-connection'
+Comic = require '../lib/comic'
 say = (args...) -> console.log "=> ", args...
 
-seed = JSON.parse(fs.readFileSync path.resolve(ROOT, 'seed.json')).seed
+seed = JSON.parse(fs.readFileSync path.resolve(__dirname, '..', 'seed.json')).seed
 
 redis.ping (err) ->
   return say "I can't cont connect to redis :( Is it running?" if err

@@ -14,7 +14,6 @@
 		"express-handlebars": "~1.1.x",
 		"morgan": "~1.5.x",
 		"node-sass": "~1.2.x",
-		"rekuire": "~0.1.x",
 		"serve-favicon": "~2.1.x",
 		"mincer": "~1.1.x"
 	},

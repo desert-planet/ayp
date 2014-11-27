@@ -7,7 +7,7 @@ redis = require '../lib/redis-connection'
 Comic = require '../lib/comic'
 say = (args...) -> console.log "=> ", args...
 
-seed = JSON.parse(fs.readFileSync path.resolve(__dirname, '../seed.json')).seed
+seed = JSON.parse(fs.readFileSync path.resolve(__dirname, '..', 'seed.json')).seed
 
 redis.ping (err) ->
   return say "I can't cont connect to redis :( Is it running?" if err

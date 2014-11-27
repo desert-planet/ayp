@@ -6,7 +6,7 @@ path = require 'path'
 ROOT = path.resolve(__dirname, '..')
 
 redis = require path.resolve(ROOT, 'lib', 'redis-connection')
-Comic = require path.resolve(ROOT, 'lib', 'Comic')
+Comic = require path.resolve(ROOT, 'lib', 'comic')
 say = (args...) -> console.log "=> ", args...
 
 seed = JSON.parse(fs.readFileSync path.resolve(ROOT, 'seed.json')).seed

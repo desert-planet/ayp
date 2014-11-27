@@ -1,29 +1,30 @@
 {
-	"name": "ayp",
-	"version": "0.0.0",
-	"description": "Hail Satain! A web comic promoting free though and drug use.",
-	"scripts": {
-		"start": "coffee server.coffee"
-	},
-
-	"dependencies": {
-		"express": "~4.10.x",
-		"redis": "~0.12.x",
-		"coffee-script": "~1.8.x",
-		"body-parser": "~1.9.x",
-		"express-handlebars": "~1.1.x",
-		"morgan": "~1.5.x",
-		"node-sass": "~1.2.x",
-		"serve-favicon": "~2.1.x",
-		"mincer": "~1.1.x"
-	},
-
-	"engines": {
-		"node": "0.10.x"
-	},
-
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/desert-planet/ayp"
-	}
+  "name": "ayp",
+  "version": "0.0.0",
+  "description": "Hail Satain! A web comic promoting free though and drug use.",
+  "scripts": {
+    "test": "mocha tests.coffee --compilers coffee:coffee-script/register",
+    "start": "coffee server.coffee"
+  },
+  "dependencies": {
+    "express": "~4.10.x",
+    "redis": "~0.12.x",
+    "coffee-script": "~1.8.x",
+    "body-parser": "~1.9.x",
+    "express-handlebars": "~1.1.x",
+    "morgan": "~1.5.x",
+    "node-sass": "~1.2.x",
+    "serve-favicon": "~2.1.x",
+    "mincer": "~1.1.x"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/desert-planet/ayp"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1"
+  }
 }

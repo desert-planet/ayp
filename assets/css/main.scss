@@ -61,6 +61,8 @@ body { height: 100%; }
 	background:#333; color: #ccc;  /* Firefox */
 }
 
+/* Brown scrollbar in Chrome. */
+
 ::-webkit-scrollbar {
 	width: 14px;
 }
@@ -134,7 +136,13 @@ body { height: 100%; }
 
 .page-archive #comic:last-child { margin-bottom: 0px; }
 
-#comic { height: 360px; background-color: #eee; }
+
+#comic {
+	height: 360px;
+	background-color: #eee;
+	/* This forces the correct page size in the event of slow images,
+	and gives the reader something to look at while strips load. */
+}
 
 #nav {
 	text-align: center;

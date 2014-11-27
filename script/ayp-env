@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ $0 == $BASH_SOURCE ]; then
+	echo "=> NO! BAD! Run '. $0' instead"
+	echo "=> It will prepapre the environment"
+	exit
+fi
+
+AYP=true
+PATH="$PATH:./node_modules/.bin"

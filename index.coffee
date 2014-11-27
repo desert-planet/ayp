@@ -1,10 +1,16 @@
+path = require 'path'
+rek = require 'rekuire'
+
+## Set the env so that we don't have to ask again
+APP_ROOT = process.env.APP_ROOT = path.resolve(__dirname)
+
 ## External configuration
 AYP_SECRET = process.env.AYP_SECRET or "That's my secret, they're all my pants."
 GA_ID      = process.env.GA_ID
 
 ## Load and configure the app
-app = require './lib/app'
-Comic = require './lib/Comic'
+app = rek '/lib/app'
+Comic = rek '/lib/Comic'
 
 app.locals.GA_ID = GA_ID
 app.set 'port', (process.env.PORT or 5000)

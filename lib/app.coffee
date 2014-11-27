@@ -1,6 +1,6 @@
 path = require 'path'
 
-ROOT = path.resolve(__dirname, '..')
+ROOT = process.env.APP_ROOT
 
 express = require 'express'
 handlebars = require 'express-handlebars'

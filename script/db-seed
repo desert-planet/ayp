@@ -5,7 +5,7 @@ path = require 'path'
 
 ROOT = path.resolve(__dirname, '..')
 
-redis = require path.resolve(ROOT, 'lib', 'redis')
+redis = require path.resolve(ROOT, 'lib', 'redis-connection')
 Comic = require path.resolve(ROOT, 'lib', 'Comic')
 say = (args...) -> console.log "=> ", args...
 

@@ -1,19 +1,26 @@
-<h1>Look at this with your special eyes</h1>
-
+<div id="page">
+<div id="comic" class="strip">
 <img src="{{ comic.url }}" alt="{{ comic.time }}" />
+</div><!--#comic.strip-->
+</div><!--#page-->
 
+<div id="nav" class="strip bottom">
+
+  <div class="pn">
 {{#if comic.prev}}
-  <a href="{{ comicUrl comic.prev }}" alt="Prev">Prev</a>
+  <a href="{{ comicUrl comic.prev }}" alt="Prev" class="prev">Prev</a>
 {{/if}}
+  </div><!--.pn-->
 
-<a href="/random/" alt="Random Strip">Random</a>
+<a href="/archive" class="archive" title="archive">archive</a>
 
+<!-- vote button goes HERE! -->
+
+<a href="/random/" alt="Random Strip" class="random" title="random strip">.ayp me</a>
+
+  <div class="pn">
 {{#if comic.next}}
-  <a href="{{ comicUrl comic.next }}" alt="Next">Next</a>
+  <a href="{{ comicUrl comic.next }}" alt="Next" class="next">Next</a>
 {{/if}}
-
-<hr>
-
-<marquee>
-  <a href="/archive">CHECK OUT THE COMPLETE ARCHIVE, IT MAKES EVEN LESS SENSE!</a>
-</marquee>
+  </div><!--.pn-->
+</div><!--#nav.strip-->

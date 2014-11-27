@@ -9,33 +9,21 @@ KeyCodes =
   p: 80
   n: 78
 
-getHrefById = (id) ->
-  element = document.getElementById(id)
-  if element
-    element.href
-
-getHrefByClassName = (className) ->
-  element = document.getElementsByClassName(className)[0]
-  if element
-    element.href
-
-document.addEventListener 'DOMContentLoaded', ->
-  window.onkeyup = (e) ->
+$ ->
+  $(document).keyup (e) ->
     # Abort if active element is an input or a textarea.
-    activeTagName = document.activeElement.tagName
-    return false if activeTagName == 'input'
-    return false if activeTagName == 'textarea'
+    return false if $(document.activeElement).is("input, textarea")
 
     switch e.which
       when KeyCodes.left, KeyCodes.k, KeyCodes.p
-        url = getHrefById 'prev'
+        url = $('#prev').attr 'href'
       when KeyCodes.right, KeyCodes.j, KeyCodes.n
-        url = getHrefById 'next'
+        url = $('#next').attr 'href'
       when KeyCodes.a
-        url = getHrefByClassName 'archive'
+        url = $('.archive').attr 'href'
       when KeyCodes.h
-        url = getHrefByClassName 'home'
+        url = $('.home').attr 'href'
       when KeyCodes.r
-        url = getHrefByClassName 'random'
+        url = $('.random').attr 'href'
 
     window.location = url if url

@@ -54,7 +54,7 @@ app.get '/random/', (request, response) ->
     return response.redirect('/') if err
     return response.redirect("/at/#{comic.time}/")
 
-app.get '/at/:stamp', (request, response) ->
+app.get '/at/:stamp?', (request, response) ->
   failHome = ->
     return response.redirect('/')
   return failHome() if isNaN(stamp = parseInt(request.params.stamp))

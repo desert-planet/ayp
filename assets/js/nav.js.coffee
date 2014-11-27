@@ -6,6 +6,8 @@ KeyCodes =
   r: 82
   j: 74
   k: 75
+  p: 80
+  n: 78
 
 getHrefById = (id) ->
   element = document.getElementById(id)
@@ -25,9 +27,9 @@ document.addEventListener 'DOMContentLoaded', ->
     return false if activeTagName == 'textarea'
 
     switch e.which
-      when KeyCodes.left, KeyCodes.k
+      when KeyCodes.left, KeyCodes.k, KeyCodes.p
         url = getHrefById 'prev'
-      when KeyCodes.right, KeyCodes.j
+      when KeyCodes.right, KeyCodes.j, KeyCodes.n
         url = getHrefById 'next'
       when KeyCodes.a
         url = getHrefByClassName 'archive'

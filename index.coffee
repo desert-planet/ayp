@@ -10,7 +10,7 @@ GA_ID      = process.env.GA_ID
 
 ## Load and configure the app
 app = rek '/lib/app'
-Comic = rek '/lib/Comic'
+Comic = rek '/lib/comic'
 
 app.locals.GA_ID = GA_ID
 app.set 'port', (process.env.PORT or 5000)

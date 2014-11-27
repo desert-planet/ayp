@@ -50,9 +50,11 @@ and all of its dependencies.
 $ npm install
 ```
 
-If nothing goes wrong, you can then load the local database with some test strips.
+If nothing goes wrong, you can then load the local database with some test strips after loading the
+dev environment.
 
 ```sh
+$ . script/ayp-env
 $ script/db-seed
 =>  I'm gonna stuff your DB with some content.
 [..snip..]

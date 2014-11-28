@@ -1,6 +1,8 @@
 KeyCodes =
   left: 37
   right: 39
+  escape: 27
+  slash: 191
   a: 65
   h: 72
   r: 82
@@ -25,5 +27,9 @@ $ ->
         url = $('.home').attr 'href'
       when KeyCodes.r
         url = $('.random').attr 'href'
+      when KeyCodes.escape
+        $('#modal-container').hide()
+      when KeyCodes.slash
+        $('#modal-container').show() if e.shiftKey == true
 
     window.location = url if url

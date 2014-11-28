@@ -8,8 +8,7 @@ Gods help us all.
 
 ## Dependencies
 
-This application is written in [Node](http://nodejs.org/) and uses [Redis](http://redis.io/) for
-persistence. To install these in OS X, **install [Homebrew](http://brew.sh/) first** and then run
+This application is written in [Node](http://nodejs.org/) and uses [Redis](http://redis.io/) for persistence. To install these in OS X, **install [Homebrew](http://brew.sh/) first** and then run
 
 ```sh
 $ brew install redis
@@ -34,8 +33,7 @@ That's about it. If something is stupid or confusing, **FILE A FUCKING ISSUE** s
 
 ## Local development
 
-First, clone the repository, and set the name of the remote to `upstream`. This will become useful
-when you fork the repository to contribute changes.
+First, clone the repository, and set the name of the remote to `upstream`. This will become useful when you fork the repository to contribute changes.
 
 ```sh
 $ git clone https://github.com/desert-planet/ayp
@@ -43,15 +41,13 @@ $ cd ayp
 $ git remote rename origin upstream
 ```
 
-Now use [npm](https://www.npmjs.org/), which should have been installed with node, to install the application
-and all of its dependencies.
+Now use [npm](https://www.npmjs.org/), which should have been installed with node, to install the application and all of its dependencies.
 
 ```sh
 $ npm install
 ```
 
-If nothing goes wrong, you can then load the local database with some test strips after loading the
-dev environment.
+If nothing goes wrong, you can then load the local database with some test strips after loading the dev environment.
 
 ```sh
 $ . script/ayp-env
@@ -68,11 +64,7 @@ $ npm start
 Your pants running at http://localhost:5000/
 ```
 
-:warning: :warning: :warning:
-
-**Code changes to `.coffee` files require a restart of the server. Because I'm bad at programming**
-
-:warning: :warning: :warning:
+If you wish to see your changes reloaded on the server, use `npm run watch`
 
 ## Setting up your fork for contribution
 
@@ -82,5 +74,4 @@ If you have already created a fork, you can add that remote as `origin`
 $ git remote add origin https://github.com/your_name_here/ayp
 ```
 
-So that newly created branches will push to your fork, but switching to `master` and running
-`git pull` will get the latest changes from the upstream repository.
+So that newly created branches will push to your fork, but switching to `master` and running `git pull` will get the latest changes from the upstream repository.

@@ -4,7 +4,8 @@
   "description": "Hail Satain! A web comic promoting free though and drug use.",
   "scripts": {
     "test": "mocha tests.coffee --compilers coffee:coffee-script/register",
-    "start": "coffee server.coffee"
+    "start": "coffee server.coffee",
+    "watch": "coffee watch.coffee"
   },
   "dependencies": {
     "express": "~4.10.x",
@@ -25,6 +26,7 @@
     "url": "https://github.com/desert-planet/ayp"
   },
   "devDependencies": {
+    "chalk": "^0.5.1",
     "mocha": "^2.0.1"
   }
 }

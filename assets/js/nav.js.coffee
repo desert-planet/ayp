@@ -30,6 +30,6 @@ $ ->
       when KeyCodes.escape
         $('#modal-container').hide()
       when KeyCodes.slash
-        $('#modal-container').show() if e.shiftKey == true
+        $('#modal-container').toggle() if e.shiftKey == true
 
     window.location = url if url

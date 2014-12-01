@@ -15,12 +15,9 @@ $ ->
 
   $("#show-nav").on "click", -> # clicking that link shows shortcuts help
     $("#modal-container").show()
-    return
 
   $("#modal-container").on "click", ->
     $(this).hide()
-    return
-
 
   $(document).keyup (e) ->
     # Abort if active element is an input or a textarea.

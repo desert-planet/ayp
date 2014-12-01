@@ -12,6 +12,13 @@ KeyCodes =
   n: 78
 
 $ ->
+
+  $("#show-nav").on "click", -> # clicking that link shows shortcuts help
+    $("#modal-container").show()
+
+  $("#modal-container").on "click", ->
+    $(this).hide()
+
   $(document).keyup (e) ->
     # Abort if active element is an input or a textarea.
     return false if $(document.activeElement).is("input, textarea")

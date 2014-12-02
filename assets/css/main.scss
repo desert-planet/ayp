@@ -242,3 +242,11 @@ html { min-width: 650px; /* anything smaller than this is Work. */ }
 
 
 }
+
+
+@media (max-width: 650px)
+/* Phones are jerks. */ {
+
+.header-box { display: none; }
+
+}

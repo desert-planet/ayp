@@ -21,6 +21,8 @@ app.engine 'handlebars', handlebars
   defaultLayout: 'main'
   helpers:
     comicUrl: (at) -> "/at/#{at}/"
+    baseUrl: -> "http://ayp.wtf.cat" # TODO: Switch on development mode
+    xmlDate: (at) -> (new Date(parseInt(at))).toString()
 
 # View, static, and LESS paths on disk
 app.set 'views', path.resolve(ROOT, 'views')

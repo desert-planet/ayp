@@ -21,6 +21,15 @@ app.get '/', (request, response) ->
     return response.status(404).send "I am literally on fire, and I can't find the latest" if err
     response.render 'strip', comic: comic
 
+app.get '/feed.xml', (request, response) ->
+  # TODO: Abstract out /archive/* into Comic so I can call it with a callback,
+  #       reieve a list and just render the feed view
+  response.set 'Content-Type', 'application/rss+xml'
+  return response.render 'feed',
+    layout: null
+    archive: [{time: 123}]
+
+
 app.get '/archive/:start?', (request, response) ->
   # Select either the latest (if start is nonsense or missing)
   # or the Comic specifed at `start` to begin the archive page

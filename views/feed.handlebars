@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+        <channel>
+            <title>ALL YOUR PANTS</title>
+            <description>The Comic From The Past About The Futre</description>
+            <link>http://ayp.wtf.cat/</link>
+
+            <atom:link href="http://ayp.wtf.cat/feed.xml" rel="self" type="application/rss+xml" />
+            {{#each archive}}
+                <item>
+                    <title>The One We Call: {{ this.time }}</title>
+                    <description>In this one, something happens again</description>
+                    <pubDate>{{xmlDate this.time }}</pubDate>
+                    <link>{{ comicUrl this.time }}</link>
+                    <guid isPermaLink="true">{{ comicUrl this.time }}</guid>
+                </item>
+            {{/each}}
+        </channel>
+    </rss>

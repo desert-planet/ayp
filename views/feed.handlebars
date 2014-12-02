@@ -3,16 +3,16 @@
         <channel>
             <title>ALL YOUR PANTS</title>
             <description>The Comic From The Past About The Futre</description>
-            <link>http://ayp.wtf.cat/</link>
+            <link>{{ baseUrl }}/</link>
 
-            <atom:link href="http://ayp.wtf.cat/feed.xml" rel="self" type="application/rss+xml" />
+            <atom:link href="{{ baseUrl }}/feed.xml" rel="self" type="application/rss+xml" />
             {{#each archive}}
                 <item>
                     <title>The One We Call: {{ this.time }}</title>
                     <description>In this one, something happens again</description>
                     <pubDate>{{xmlDate this.time }}</pubDate>
-                    <link>{{ comicUrl this.time }}</link>
-                    <guid isPermaLink="true">{{ comicUrl this.time }}</guid>
+                    <link>{{ baseUrl }}{{ comicUrl this.time }}</link>
+                    <guid isPermaLink="true">{{ baseUrl }}{{ comicUrl this.time }}</guid>
                 </item>
             {{/each}}
         </channel>

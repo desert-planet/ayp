@@ -100,6 +100,13 @@ module.exports = class Comic
 
       cb(undefined, comics)
 
+  # Invoke callback as `cb(err, {archive: [Comic, ...], next: Comic, prev: Comic}...)`
+  # `err` will be set if an error is encountered.
+  #
+  # Every Comic except the first comic in the `archive:` list are shallow-loaded, and should _NOT_
+  # be expected to contain pointer information, only the `Comic#time` should be considered correct, and if
+  # any additional info is required it should be loaded with `Comic.at` using `Comic#time` on the shallow
+  # objects.
   @archive: (start, cb) ->
     # Select either the latest (if start is nonsense or missing)
     # or the Comic specifed at `start` to begin the archive page

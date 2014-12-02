@@ -1,9 +1,6 @@
-/* AYP Version 2 CSS by solios, who is full of WordPress habits. */
+/* AYP Version 2.1 CSS by solios, who is full of WordPress habits. */
 
-/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com - It works(tm).
-You know what they say about assumptions.
-They make an ass out of u and mptions. */
-
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com - It works(tm). */
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,
 abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,
 strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,
@@ -48,34 +45,40 @@ body { height: 100%; }
 
 #flavor {
 	/* It's not stupid, it's advanced! */
-		position: fixed;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-		/* seriously ugly; seriously necessary. */
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	/* seriously ugly; seriously necessary. */
 	background: rgba(0,0,0,0.7); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.7)), color-stop(100%,rgba(0,0,0,0.0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(0,0,0,0.7)', endColorstr='rgba(0,0,0,0.0)',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.7) 0%,
+		rgba(0,0,0,0.0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom,
+	 	color-stop(0%,rgba(0,0,0,0.7)),
+		color-stop(100%,rgba(0,0,0,0.0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,
+		rgba(0,0,0,0.0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,0,0,0.7) 0%,
+		rgba(0,0,0,0.0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0.7) 0%,
+		rgba(0,0,0,0.0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,
+		rgba(0,0,0,0.0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(0,0,0,0.7)',
+		endColorstr='rgba(0,0,0,0.0)',GradientType=0 ); /* IE6-9 */
 	height: 100%;
 	background-attachment: fixed;
-
 }
 
-
-::selection		{
+::selection	{
 	background:#333; color: #ccc;  /* Safari and Opera */
 }
 
-::-moz-selection 	{
+::-moz-selection {
 	background:#333; color: #ccc;  /* Firefox */
 }
 
-/* Brown scrollbar in Chrome. */
+/* A matching brown scrollbar. */
 
 ::-webkit-scrollbar {
 	width: 14px;
@@ -91,14 +94,20 @@ body { height: 100%; }
 	background-color: #634c38;
 }
 
-
 ::-webkit-scrollbar-thumb:active {
 	border-radius: 0px;
 	background-color: #8a6a4f;
 }
 
-::-webkit-scrollbar-corner    { background-color: #646464; color: #c8c8c8; }
-::-webkit-resizer 	{ background-color: #646464; color:#c8c8c8; }
+::-webkit-scrollbar-corner    {
+	background-color: #646464;
+	color: #c8c8c8;
+}
+
+::-webkit-resizer {
+	background-color: #646464;
+	color:#c8c8c8;
+}
 
 
 #ayp {
@@ -106,9 +115,8 @@ body { height: 100%; }
 	position: relative;
 	margin: 0 auto;
 	max-width: 1120px;
-  	overflow: hidden; }
-
-
+  	overflow: hidden;
+}
 
 #header {
 	width: 970px;
@@ -145,26 +153,34 @@ body { height: 100%; }
 	margin-bottom: 10px;
 }
 
+.page-archive #comic {
+	margin-bottom: 20px;
+}
 
-.page-archive #comic { margin-bottom: 20px; }
-
-.page-archive #comic:last-child { margin-bottom: 0px; }
-
+.page-archive #comic:last-child {
+	margin-bottom: 0px;
+}
 
 #comic {
 	background-color: #eee;
+
 	/* This forces the correct page size in the event of slow images,
-	and gives the reader something to look at while strips load. */
+	and gives the reader something to look at while strips load; the
+	knowledge that a strip is supposed to be there.  This works
+	responsively.  AYP strips are 3x1, so height is 33.33% of width. */
 
 	position: relative;
-	padding-bottom: 33%;
+	padding-bottom: 33.33%;
 	height: 0;
 	margin: 0 auto;
 	max-width: 1080px;
-
 }
 
-#comic img { max-width: 100%; height: auto; }
+#comic img {
+	/* Combined with #comic this makes the strip resize responsively. */
+	max-width: 100%;
+	height: auto;
+}
 
 #nav {
 	text-align: center;
@@ -173,11 +189,18 @@ body { height: 100%; }
 	text-shadow: 0px 2px 4px rgba(0,0,0,0.7)
 }
 
-#nav.top { margin-bottom: 10px; padding-top: 0px; }
+#nav.top {
+	margin-bottom: 10px;
+	padding-top: 0px;
+}
 
-#nav.top a { margin: 0px 8px; }
+#nav.top a {
+	margin: 0px 8px;
+}
 
-#nav.bottom a { margin: 0px 8px; }
+#nav.bottom a {
+	margin: 0px 8px;
+}
 
 #nav .pn {
 	display: inline-block;
@@ -207,46 +230,164 @@ body { height: 100%; }
 @import 'modal';
 
 
-#show-nav, .modal { cursor: pointer; }
-
-@media (max-width: 1120px) /* Strip plus gutters */ {
-
-#page,{ border-radius: 0px; }
-
-#header { padding: 20px 0px; }
-
+#show-nav, .modal {
+	cursor: pointer;
 }
+
+
+@media (max-width: 1120px)
+	/* Strip plus gutters.  We're not doing a whole lot at this stage, just
+	shaving the rounded corners off of #page and giving #header some
+	breathing room. */ {
+
+#page,{
+	border-radius: 0px;
+}
+
+#header {
+	padding: 20px 0px;
+}
+
+} /* End @media (max-width: 1120px).  That was brief. */
+
 
 @media (max-width: 1000px)
-	/* Getting smaller, time to adjust everything else. */ {
+	/* Getting smaller, time to adjust everything else. At this point
+	we're assuming a tablet or netbook; smaller but not necessarily
+	a phone. */ {
 
-html { min-width: 650px; /* anything smaller than this is Work. */ }
-
-#ayp { max-width: 100%; }
-
-#header { height: 72px; padding-bottom: 10px; width: 100%; }
-
-#header h1 a { float: none; margin-right: 0px; margin: 0 auto;
-	background-image: url("/static/images/ayp_1-line.png");
-	width: 606px;
-	height: 72px;
-	}
-
-.header-box { position: absolute; bottom: 70px; margin: 0 auto; width: 100%; text-align: center; }
-
-.header-box img { max-width: 468px; height: auto; /* classic banner ad size */}
-
-#content { margin-bottom: 140px; }
-
-#footer { max-width: 100%; padding: 10px 0px; }
-
-
+#ayp {
+	max-width: 100%;
 }
+
+#header {
+	height: 60px;
+	padding-bottom: 10px;
+	width: 100%;
+}
+
+#header h1 a {
+	float: none; margin-right: 0px; margin: 0 auto;
+	background-image: url("/static/images/ayp_1-line.png");
+	background-size: 500px auto;
+	width: 500px;
+	height: 60px;
+	background-repeat: no-repeat;
+}
+
+.header-box {
+	position: absolute;
+	bottom: 70px;
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+}
+
+.header-box img {
+	/* classic banner ad size */
+	max-width: 468px;
+	height: auto;
+}
+
+#page {
+	padding: 10px;
+}
+
+.page-archive #comic {
+	margin-bottom: 10px;
+}
+
+#content {
+	margin-bottom: 140px;
+}
+
+#footer {
+	max-width: 100%;
+	padding: 10px 0px;
+}
+
+} /* End @media (max-width: 1000px). */
 
 
 @media (max-width: 650px)
-/* Phones are jerks. */ {
+	/* This one's a bit more involved. Phones are jerks.  Let's deal with
+	this in CSS instead of with device queries that will *also* require
+	CSS. */ {
 
-.header-box { display: none; }
+html {
+	min-width: 600px; /* anything smaller than this is Work.
+	More importantly this is the smallest viewport width that
+	Arial strips are legible at. */
 
+	/* there are issues with #flavor even on modern phones so lets drop it
+	and go with a flat gradient background, sampled from a screenshot of
+	the #flavor-based background presentation.  This loses the texture but
+	maintains most of the desired tone. */
+	background-image:none;
+	background: #2c2218; /* Old browsers */
+	background: -moz-linear-gradient(top,  #2c2218 0%, #6f563e 100%);
+		/* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom,
+	 	color-stop(0%,#2c2218), color-stop(100%,#6f563e));
+		/* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #2c2218 0%,#6f563e 100%);
+		/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #2c2218 0%,#6f563e 100%);
+		/* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #2c2218 0%,#6f563e 100%);
+		/* IE10+ */
+	background: linear-gradient(to bottom,  #2c2218 0%,#6f563e 100%);
+		/* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c2218', endColorstr='#6f563e',GradientType=0 );
+		/* IE6-9 */
+	background-attachment: fixed;
 }
+
+#flavor {
+	display: none;
+}
+
+#header {
+	height: 30px;
+}
+
+#header h1 a {
+	background-size: 300px auto;
+	background-repeat: no-repeat;
+	height: 35px;
+	width: 300px;
+}
+
+.header-box {
+	bottom: 10px;
+}
+
+#page {
+	padding: 5px;
+}
+
+#content {
+	margin-bottom: 0px;
+}
+
+.page-archive #comic {
+	margin-bottom: 5px;
+}
+
+#nav {
+	font-size: 24px;
+	line-height: 36px;
+}
+
+#footer {
+	/* Works around adbox and font sizing issues on mobile devices by
+	assimilating the #footer and sticking the .header-box under it. */
+	position: relative;
+	margin-bottom: 70px;
+}
+
+#footer p {
+	font-size: 12px;
+}
+
+} /* End @media (max-width: 650px). */

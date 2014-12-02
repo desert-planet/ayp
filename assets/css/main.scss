@@ -105,7 +105,7 @@ body { height: 100%; }
 	min-height: 100%;
 	position: relative;
 	margin: 0 auto;
-	width: 1120px;
+	max-width: 1120px;
   	overflow: hidden; }
 
 
@@ -152,11 +152,19 @@ body { height: 100%; }
 
 
 #comic {
-	height: 360px;
 	background-color: #eee;
 	/* This forces the correct page size in the event of slow images,
 	and gives the reader something to look at while strips load. */
+
+	position: relative;
+	padding-bottom: 33%;
+	height: 0;
+	margin: 0 auto;
+	max-width: 1080px;
+
 }
+
+#comic img { max-width: 100%; height: auto; }
 
 #nav {
 	text-align: center;
@@ -200,3 +208,37 @@ body { height: 100%; }
 
 
 #show-nav, .modal { cursor: pointer; }
+
+@media (max-width: 1120px) /* Strip plus gutters */ {
+
+#page,{ border-radius: 0px; }
+
+#header { padding: 20px 0px; }
+
+}
+
+@media (max-width: 1000px)
+	/* Getting smaller, time to adjust everything else. */ {
+
+html { min-width: 650px; /* anything smaller than this is Work. */ }
+
+#ayp { max-width: 100%; }
+
+#header { height: 72px; padding-bottom: 10px; width: 100%; }
+
+#header h1 a { float: none; margin-right: 0px; margin: 0 auto;
+	background-image: url("/static/images/ayp_1-line.png");
+	width: 606px;
+	height: 72px;
+	}
+
+.header-box { position: absolute; bottom: 70px; margin: 0 auto; width: 100%; text-align: center; }
+
+.header-box img { max-width: 468px; height: auto; /* classic banner ad size */}
+
+#content { margin-bottom: 140px; }
+
+#footer { max-width: 100%; padding: 10px 0px; }
+
+
+}

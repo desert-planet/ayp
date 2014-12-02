@@ -24,10 +24,13 @@ app.get '/', (request, response) ->
 app.get '/feed.xml', (request, response) ->
   # TODO: Abstract out /archive/* into Comic so I can call it with a callback,
   #       reieve a list and just render the feed view
-  response.set 'Content-Type', 'application/rss+xml'
-  return response.render 'feed',
-    layout: null
-    archive: [{time: 123}]
+  Comic.archive 'latest', (err, archive) ->
+    return response.status(500).send "Sorry, my programming broke building the feed" if err
+
+    response.set 'Content-Type', 'application/rss+xml'
+    return response.render 'feed',
+      layout: null
+      archive: archive.archive
 
 
 app.get '/archive/:start?', (request, response) ->

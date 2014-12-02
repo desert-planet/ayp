@@ -100,6 +100,29 @@ module.exports = class Comic
 
       cb(undefined, comics)
 
+  @archive: (start, cb) ->
+    # Select either the latest (if start is nonsense or missing)
+    # or the Comic specifed at `start` to begin the archive page
+    start = parseInt(start)
+    if isNaN(start)
+      fetch = (cb) -> Comic.latest(cb)
+    else
+      fetch = (cb) -> Comic.at(start, cb)
+
+    fetch (err, first) =>
+      return cb(err) if err
+      Comic.before first.time, 10, (err, comicsBefore) =>
+        return cb(err) if err
+        # We fetch the list of comics after so we can generate
+        # a "Previous" (Forward in time) archive page
+        Comic.after first.time, 10, (err, comicsAfter) =>
+          return cb(err) if err
+          cb undefined,
+            archive: [first, comicsBefore[..-2]...]
+            next: comicsBefore[comicsBefore.length - 1]
+            prev: comicsAfter[comicsAfter.length - 1]
+
+
 
   # Fetch the latest comic and invoke cb as in `Comic.at`
   @latest: (cb) ->

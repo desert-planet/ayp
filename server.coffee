@@ -31,30 +31,9 @@ app.get '/feed.xml', (request, response) ->
 
 
 app.get '/archive/:start?', (request, response) ->
-  # Select either the latest (if start is nonsense or missing)
-  # or the Comic specifed at `start` to begin the archive page
-  start = parseInt(request.params.start)
-  if isNaN(start)
-    fetch = (cb) -> Comic.latest(cb)
-  else
-    fetch = (cb) -> Comic.at(start, cb)
-
-  fetch (err, first) =>
-    # If we fail, redirect to the beginning of the archive
+  Comic.archive request.params.start, (err, archive) =>
     return response.redirect("/archive/") if err
-
-    Comic.before first.time, 10, (err, comicsBefore) =>
-      return response.redirect("/archive/") if err
-
-      # We fetch the list of comics after so we can generate
-      # a "Previous" (Forward in time) archive page
-      Comic.after first.time, 10, (err, comicsAfter) =>
-        return response.redirect("/archive/") if err
-
-        return response.render 'archive',
-          archive: [first, comicsBefore[..-2]...]
-          next: comicsBefore[comicsBefore.length - 1]
-          prev: comicsAfter[comicsAfter.length - 1]
+    return response.render 'archive', archive
 
 app.get '/random/', (request, response) ->
   Comic.random (err, comic) =>

@@ -30,9 +30,6 @@ module.exports = class Comic
       else
         ext
 
-    base += 'png' if @url[-3..].toLowerCase() == 'png'
-    base += 'png'
-
   # Populate `prev` and `next` if possible, then invoke callback
   # The new properties will be populated with timestamps, not comic objects
   #

@@ -22,7 +22,7 @@ app.engine 'handlebars', handlebars
   helpers:
     comicUrl: (at) -> "/at/#{at}/"
     baseUrl: -> "http://ayp.wtf.cat" # TODO: Switch on development mode
-    xmlDate: (at) -> (new Date(parseInt(at))).toString()
+    xmlDate: (at) -> (new Date(parseInt(at))).toUTCString()
 
 # View, static, and LESS paths on disk
 app.set 'views', path.resolve(ROOT, 'views')

@@ -21,6 +21,11 @@ module.exports = class Comic
       # TODO: Check success and pass loading through Comic.at
       cb(err, this)
 
+  # Return the mime type of the image
+  mime: ->
+    ext = @url[-3..].toLowerCase()
+    return "image/#{ext}"
+
   # Populate `prev` and `next` if possible, then invoke callback
   # The new properties will be populated with timestamps, not comic objects
   #
@@ -107,7 +112,7 @@ module.exports = class Comic
   # be expected to contain pointer information, only the `Comic#time` should be considered correct, and if
   # any additional info is required it should be loaded with `Comic.at` using `Comic#time` on the shallow
   # objects.
-  @archive: (start, cb) ->
+  @archive: (start, count, cb) ->
     # Select either the latest (if start is nonsense or missing)
     # or the Comic specifed at `start` to begin the archive page
     start = parseInt(start)
@@ -118,11 +123,11 @@ module.exports = class Comic
 
     fetch (err, first) =>
       return cb(err) if err
-      Comic.before first.time, 10, (err, comicsBefore) =>
+      Comic.before first.time, count, (err, comicsBefore) =>
         return cb(err) if err
         # We fetch the list of comics after so we can generate
         # a "Previous" (Forward in time) archive page
-        Comic.after first.time, 10, (err, comicsAfter) =>
+        Comic.after first.time, count, (err, comicsAfter) =>
           return cb(err) if err
           cb undefined,
             archive: [first, comicsBefore[..-2]...]

@@ -22,9 +22,7 @@ app.get '/', (request, response) ->
     response.render 'strip', comic: comic
 
 app.get '/feed.xml', (request, response) ->
-  # TODO: Abstract out /archive/* into Comic so I can call it with a callback,
-  #       reieve a list and just render the feed view
-  Comic.archive 'latest', (err, archive) ->
+  Comic.archive 'latest', 100, (err, archive) ->
     return response.status(500).send "Sorry, my programming broke building the feed" if err
 
     response.set 'Content-Type', 'application/rss+xml'
@@ -34,7 +32,7 @@ app.get '/feed.xml', (request, response) ->
 
 
 app.get '/archive/:start?', (request, response) ->
-  Comic.archive request.params.start, (err, archive) =>
+  Comic.archive request.params.start, 10, (err, archive) =>
     return response.redirect("/archive/") if err
     return response.render 'archive', archive
 

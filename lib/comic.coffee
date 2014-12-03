@@ -21,6 +21,18 @@ module.exports = class Comic
       # TODO: Check success and pass loading through Comic.at
       cb(err, this)
 
+  # Return the mime type of the image
+  mime: ->
+    ext = @url[-3..].toLowerCase()
+    return 'image/' +
+      if ext in ['jpeg', 'jpg']
+        'jpeg'
+      else
+        ext
+
+    base += 'png' if @url[-3..].toLowerCase() == 'png'
+    base += 'png'
+
   # Populate `prev` and `next` if possible, then invoke callback
   # The new properties will be populated with timestamps, not comic objects
   #

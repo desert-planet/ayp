@@ -22,8 +22,6 @@ app.get '/', (request, response) ->
     response.render 'strip', comic: comic
 
 app.get '/feed.xml', (request, response) ->
-  # TODO: Abstract out /archive/* into Comic so I can call it with a callback,
-  #       reieve a list and just render the feed view
   Comic.archive 'latest', 100, (err, archive) ->
     return response.status(500).send "Sorry, my programming broke building the feed" if err
 

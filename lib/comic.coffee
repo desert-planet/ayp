@@ -6,11 +6,12 @@ module.exports = class Comic
 
   # The Class and Instance accessors for the keys.
   # The instance accessor just looks it up by class one
-  @key: (suffix) ->
+  @key: (suffix...) ->
+    console.log "Getting key from:", suffix
     key = "#{@prefix}:comics"
-    key += ":#{suffix}" if suffix?
+    key += ":#{suffix.join(':')}" if suffix.length
     key
-  key: (suffix) -> @constructor.key(suffix)
+  key: (suffix...) -> @constructor.key(suffix...)
 
   # Describe either a new, or exsting comic
   constructor: (@url, @time, options={}) ->

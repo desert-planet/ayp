@@ -34,6 +34,9 @@ app.use favicon(path.resolve(ROOT, 'public', 'favicon.ico'))
 # Handle assets with mincer.
 mincerEnv = new mincer.Environment();
 mincerEnv.appendPath path.resolve(ROOT, 'assets')
+
+mincer.CoffeeEngine.configure bare: false
+
 app.use '/assets', mincer.createServer(mincerEnv)
 
 # Parse JSON

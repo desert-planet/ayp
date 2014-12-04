@@ -22,5 +22,8 @@ $ ->
 
       success: (data, status, jxhr) ->
         return unless data.count > 0
+        $this.addClass 'succeeded'
+        setTimeout((=> $this.removeClass 'succeeded'), 250)
+
         {count} = data
         $counter.text(count)

@@ -12,6 +12,9 @@ mincer = require 'mincer'
 ## Set up the app
 module.exports = app = express()
 
+# Heroku forwards our clients with `X-Forarded-For`
+app.set 'trust proxy', true
+
 # Logging
 app.use morgan('short')
 
@@ -34,6 +37,9 @@ app.use favicon(path.resolve(ROOT, 'public', 'favicon.ico'))
 # Handle assets with mincer.
 mincerEnv = new mincer.Environment();
 mincerEnv.appendPath path.resolve(ROOT, 'assets')
+
+mincer.CoffeeEngine.configure bare: false
+
 app.use '/assets', mincer.createServer(mincerEnv)
 
 # Parse JSON

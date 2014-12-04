@@ -51,6 +51,30 @@ app.get '/at/:stamp?', (request, response) ->
     return failHome() if err
     response.render 'strip', comic: comic
 
+app.post "/vote/:stamp?", (req, res) ->
+  fail = (why, status=400) ->
+    res.status(status).send JSON.stringify error: why
+  res.set 'Content-Type', 'application/json'
+
+  if isNaN(stamp = parseInt(req.params.stamp))
+    return fail "Bad comic index #{req.params.stamp}"
+  unless req.body.now
+    return fail "You didn't even try that hard!"
+
+  Comic.at stamp, (err, comic) =>
+    return fail("Failed to load comic @#{stamp}") if err
+    comic.vote req.ip, (err, comic) =>
+      # An error that is also okay is a soft error,
+      # we'll tell the user to not do it agin with the reason
+      if err && {ok: reason} = err
+        return fail(reason, 403)
+      # Any other error is just flunked out
+      return fail("Failed to vote") if err
+      return res.send JSON.stringify
+        ok: 'count'
+        count: comic.votes
+
+
 app.post "/new/", (req, res) ->
   res.set 'Content-Type', 'application/json'
   if req.body.secret != AYP_SECRET

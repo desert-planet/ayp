@@ -391,3 +391,13 @@ html {
 }
 
 } /* End @media (max-width: 650px). */
+
+// AJAX-triggering links will have this class
+// applied briefly after an error or success
+a.failed {
+  color: red;
+}
+
+a.succeeded {
+  color: green;
+}

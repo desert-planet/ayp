@@ -6,11 +6,15 @@ module.exports = class Comic
 
   # The Class and Instance accessors for the keys.
   # The instance accessor just looks it up by class one
-  @key: () -> "#{@prefix}:comics"
-  key: -> @constructor.key()
+  @key: (suffix...) ->
+    key = "#{@prefix}:comics"
+    key += ":#{suffix.join(':')}" if suffix.length
+    key
+  key: (suffix...) -> @constructor.key(suffix...)
 
   # Describe either a new, or exsting comic
   constructor: (@url, @time, options={}) ->
+    @votes = 0
     @saved = options.saved ? false
 
   # Store the current commic in the database.
@@ -26,6 +30,29 @@ module.exports = class Comic
     ext = @url[-3..].toLowerCase()
     return "image/#{ext}"
 
+  # Cast a vote for `this`. The `caster` should be a permanent-ish
+  # identifier for a voter, each `caster` can vote for every Comic once
+  #
+  # Callback will be invoked as `cb(err, comic)`.
+  vote: (caster, cb) =>
+    caster ?= 'anonymous'
+
+    redis.sismember @key('voters', @time), caster, (err, res) =>
+      return cb(err) if err
+
+      # We'll test for this as a soft error in the handler if we need to
+      return cb({ok: "Already voted"}) if res
+
+      redis.zincrby @key('votes'), 1, @url, (err, res) =>
+        return cb(err) if err
+
+        # We don't care so much if the vote recording fails, the user
+        # just gets to join the lucky few with two votes for this comic.
+        #
+        # HOORAY YOU!
+        redis.sadd [@key('voters', @time), caster]
+        return @update(cb)
+
   # Populate `prev` and `next` if possible, then invoke callback
   # The new properties will be populated with timestamps, not comic objects
   #
@@ -34,6 +61,7 @@ module.exports = class Comic
     cb("@time not set") unless @time
 
     failed = false
+    gotVotes = false
     finish = (finishPart) =>
       (err, res) =>
         return if failed # Make sure nothing else happens after we fail
@@ -43,7 +71,8 @@ module.exports = class Comic
         finishPart(res)
 
         # Then return success to the caller if we filled in both sides
-        return cb(undefined, this) if (@next isnt undefined) and (@prev isnt undefined)
+        if (@next isnt undefined) and (@prev isnt undefined) and gotVotes
+          return cb(undefined, this)
 
     # Fire the workers to update the next and prev
     #
@@ -60,6 +89,12 @@ module.exports = class Comic
         @next = res[1] || null
     redis.zrevrangebyscore [@key(), "#{@time - 1}", '-inf', 'WITHSCORES', 'LIMIT', 0, 1], finish (res) =>
         @prev = res[1] || null
+
+    # Kick off the job to fetch the vote count, or keep it at 0
+    redis.zscore @key('votes'), @url, finish (res) =>
+      @votes = res or 0
+      gotVotes = true
+
 
   # Return a comic stamped at `stamp` to caller by
   # invoking callback as `cb(err, Comic)` if it is found.

@@ -11,6 +11,7 @@ module.exports = class Comic
 
   # Describe either a new, or exsting comic
   constructor: (@url, @time, options={}) ->
+    @votes = 0
     @saved = options.saved ? false
 
   # Store the current commic in the database.

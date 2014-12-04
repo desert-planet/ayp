@@ -6,8 +6,11 @@ module.exports = class Comic
 
   # The Class and Instance accessors for the keys.
   # The instance accessor just looks it up by class one
-  @key: () -> "#{@prefix}:comics"
-  key: -> @constructor.key()
+  @key: (suffix) ->
+    key = "#{@prefix}:comics"
+    key += ":#{suffix}" if suffix?
+    key
+  key: (suffix) -> @constructor.key(suffix)
 
   # Describe either a new, or exsting comic
   constructor: (@url, @time, options={}) ->
@@ -35,6 +38,7 @@ module.exports = class Comic
     cb("@time not set") unless @time
 
     failed = false
+    gotVotes = false
     finish = (finishPart) =>
       (err, res) =>
         return if failed # Make sure nothing else happens after we fail
@@ -44,7 +48,8 @@ module.exports = class Comic
         finishPart(res)
 
         # Then return success to the caller if we filled in both sides
-        return cb(undefined, this) if (@next isnt undefined) and (@prev isnt undefined)
+        if (@next isnt undefined) and (@prev isnt undefined) and gotVotes
+          return cb(undefined, this)
 
     # Fire the workers to update the next and prev
     #
@@ -61,6 +66,12 @@ module.exports = class Comic
         @next = res[1] || null
     redis.zrevrangebyscore [@key(), "#{@time - 1}", '-inf', 'WITHSCORES', 'LIMIT', 0, 1], finish (res) =>
         @prev = res[1] || null
+
+    # Kick off the job to fetch the vote count, or keep it at 0
+    redis.zscore @key('votes'), @url, finish (res) =>
+      @votes = res or 0
+      gotVotes = true
+
 
   # Return a comic stamped at `stamp` to caller by
   # invoking callback as `cb(err, Comic)` if it is found.

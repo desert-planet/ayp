@@ -10,6 +10,7 @@ KeyCodes =
   k: 75
   p: 80
   n: 78
+  v: 86
 
 $ ->
 
@@ -38,5 +39,7 @@ $ ->
         $('#modal-container').hide()
       when KeyCodes.slash
         $('#modal-container').toggle() if e.shiftKey == true
+      when KeyCodes.v
+        $('.vote').click()
 
     window.location = url if url

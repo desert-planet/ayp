@@ -51,6 +51,27 @@ app.get '/at/:stamp?', (request, response) ->
     return failHome() if err
     response.render 'strip', comic: comic
 
+app.post "/vote/:stamp?", (req, res) ->
+  res.set 'Content-Type', 'application/json'
+
+  fail = (why, status=400) ->
+    res.status(status).send JSON.stringify error: why
+
+  if isNaN(stamp = parseInt(req.params.stamp))
+    return fail "Bad comic index #{req.params.stamp}"
+
+  unless req.body.now
+    return fail "You didn't even try that hard!"
+
+  Comic.at stamp, (err, comic) =>
+    return fail("#{err}") if err
+
+    # TODO: Try or failt to cast he vote
+    return res.send JSON.stringify
+      ok: 'count'
+      count: 666
+
+
 app.post "/new/", (req, res) ->
   res.set 'Content-Type', 'application/json'
   if req.body.secret != AYP_SECRET

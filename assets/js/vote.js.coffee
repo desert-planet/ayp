@@ -9,6 +9,16 @@ $ ->
     console.log "Vote on: #{comicID} with #{count} votes so far"
 
     # TODO: Make a call, then on success
-    do ->
-      count += 1
-      $counter.text count
+    $.ajax "/vote/#{comicID}/",
+      type: 'POST'
+      headers: {'Content-Type': 'application/json'}
+      data: JSON.stringify(now: Date.now())
+      timeout: 10 * 1000
+
+      error: (jxhr, text, err) ->
+        "TODO: Blink the thing red or something?"
+
+      success: (data, status, jxhr) ->
+        return unless data.count > 0
+        {count} = data
+        $counter.text(count)

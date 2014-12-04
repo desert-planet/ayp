@@ -7,7 +7,6 @@ module.exports = class Comic
   # The Class and Instance accessors for the keys.
   # The instance accessor just looks it up by class one
   @key: (suffix...) ->
-    console.log "Getting key from:", suffix
     key = "#{@prefix}:comics"
     key += ":#{suffix.join(':')}" if suffix.length
     key

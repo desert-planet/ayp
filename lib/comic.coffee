@@ -38,10 +38,21 @@ module.exports = class Comic
   vote: (caster, cb) =>
     caster ?= 'anonymous'
 
-    # TODO: Guard by caster
-    redis.zincrby @key('votes'), 1, @url, (err, res) =>
+    redis.sismember @key('voters', @time), caster, (err, res) =>
       return cb(err) if err
-      return @update(cb)
+
+      # We'll test for this as a soft error in the handler if we need to
+      return cb({ok: "Already voted"}) if res
+
+      redis.zincrby @key('votes'), 1, @url, (err, res) =>
+        return cb(err) if err
+
+        # We don't care so much if the vote recording fails, the user
+        # just gets to join the lucky few with two votes for this comic.
+        #
+        # HOORAY YOU!
+        redis.sadd [@key('voters', @time), caster]
+        return @update(cb)
 
   # Populate `prev` and `next` if possible, then invoke callback
   # The new properties will be populated with timestamps, not comic objects

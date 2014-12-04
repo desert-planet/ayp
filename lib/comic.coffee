@@ -30,6 +30,18 @@ module.exports = class Comic
     ext = @url[-3..].toLowerCase()
     return "image/#{ext}"
 
+  # Cast a vote for `this`. The `caster` should be a permanent-ish
+  # identifier for a voter, each `caster` can vote for every Comic once
+  #
+  # Callback will be invoked as `cb(err, comic)`.
+  vote: (caster, cb) =>
+    caster ?= 'anonymous'
+
+    # TODO: Guard by caster
+    redis.zincrby @key('votes'), 1, @url, (err, res) =>
+      return cb(err) if err
+      return @update(cb)
+
   # Populate `prev` and `next` if possible, then invoke callback
   # The new properties will be populated with timestamps, not comic objects
   #

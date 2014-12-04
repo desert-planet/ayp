@@ -66,10 +66,11 @@ app.post "/vote/:stamp?", (req, res) ->
   Comic.at stamp, (err, comic) =>
     return fail("#{err}") if err
 
-    # TODO: Try or failt to cast he vote
-    return res.send JSON.stringify
-      ok: 'count'
-      count: 666
+    comic.vote req.ip, (err, comic) =>
+      return fail("#{err}") if err
+      return res.send JSON.stringify
+        ok: 'count'
+        count: comic.votes
 
 
 app.post "/new/", (req, res) ->

@@ -1,7 +1,8 @@
 $ ->
   $('.vote').on 'click', (event) ->
     do event.preventDefault
-    return unless (comicID = $(this).data 'id')
+    $this = $(this)
+    return unless (comicID = $this.data 'id')
     $counter = $('.number-of-votes')
     count = parseInt $counter.text()
     count = 0 if isNaN(count)
@@ -16,7 +17,8 @@ $ ->
       timeout: 10 * 1000
 
       error: (jxhr, text, err) ->
-        "TODO: Blink the thing red or something?"
+        $this.addClass 'failed'
+        setTimeout((=> $this.removeClass 'failed'), 250)
 
       success: (data, status, jxhr) ->
         return unless data.count > 0

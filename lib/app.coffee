@@ -12,6 +12,9 @@ mincer = require 'mincer'
 ## Set up the app
 module.exports = app = express()
 
+# Heroku forwards our clients with `X-Forarded-For`
+app.set 'trust proxy', true
+
 # Logging
 app.use morgan('short')
 

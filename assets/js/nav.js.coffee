@@ -13,6 +13,7 @@ KeyCodes =
   v: 86
   f: 70
   s: 83
+  t: 84
   l: 76
 
 $ ->
@@ -33,11 +34,13 @@ $ ->
       when KeyCodes.right, KeyCodes.j, KeyCodes.n
         url = $('#next').attr 'href'
       when KeyCodes.a
-        url = $('.archive').attr 'href'
+        url = $('.strip-archive').attr 'href'
       when KeyCodes.h
         url = $('.home').attr 'href'
       when KeyCodes.r
         url = $('.random').attr 'href'
+      when KeyCodes.t
+        url = $('.top-strips').attr 'href'
       when KeyCodes.escape
         $('#modal-container').hide()
       when KeyCodes.slash

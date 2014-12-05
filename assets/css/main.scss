@@ -142,7 +142,7 @@ body { height: 100%; }
 
 #content {
 	margin-top: 10px;
-	margin-bottom: 60px; /* Eyeball against #footer */
+	margin-bottom: 70px; /* Eyeball against #footer */
 }
 
 #page {
@@ -154,10 +154,14 @@ body { height: 100%; }
 }
 
 .page-archive #comic {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .page-archive #comic:last-child {
+	margin-bottom: 10px;
+}
+
+.page-archive .strip-info:last-child {
 	margin-bottom: 0px;
 }
 
@@ -174,12 +178,32 @@ body { height: 100%; }
 	height: 0;
 	margin: 0 auto;
 	max-width: 1080px;
+	margin-bottom: 10px;
 }
 
 #comic img {
 	/* Combined with #comic this makes the strip resize responsively. */
 	max-width: 100%;
 	height: auto;
+}
+
+.strip-info {
+	color: #666;
+	text-align: center;
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.page-archive .strip-info {
+	margin-bottom: 10px;
+}
+
+.strip-info .votes {
+	margin-right: 10px;
+}
+
+.strip-info .label {
+	color: #777;
 }
 
 #nav {
@@ -202,6 +226,10 @@ body { height: 100%; }
 	margin: 0px 8px;
 }
 
+#nav a {
+	display: inline-block;
+}
+
 #nav .pn {
 	display: inline-block;
 	width: 41px; /* This is the computed width in Chrome;
@@ -210,6 +238,9 @@ body { height: 100%; }
 	as well as a lack of a "previous" on the first page of
 	the comic archive, should you ever see it. */
 }
+
+.nav-next { margin-left: 0px !important; }
+.nav-prev { margin-right: 0px !important; }
 
 #footer {
 	position: absolute;
@@ -291,6 +322,9 @@ body { height: 100%; }
 
 #page {
 	padding: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 15px;
+	display: inline-block;
 }
 
 .page-archive #comic {
@@ -400,12 +434,4 @@ a.failed {
 
 a.succeeded {
   color: green;
-}
-
-// Style for stars in the archive pages
-// v. I HAVE NO IDEA WHAT I'M DOING
-.top-info {
-  margin-left: 10px;
-  color: black;
-  font-weight: bolder;
 }

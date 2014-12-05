@@ -1,6 +1,8 @@
 {{#if prev}}
 <div id="nav" class="archive top">
-<a href="/archive/{{prev.time}}/" title="Previous page of strips (&larr;)" id="prev" class="nav-prev"><i class="icon-left-open icon"></i> Previous page of strips</a>
+<a href="/archive/{{prev.time}}/" title="previous page of strips (&larr;)" id="prev" class="nav-prev"><i class="icon-left-open icon"></i> previous page of strips</a>
+<a href="/archive/" class="strip-archive" title="Strip Archive (a)">archive</a>
+<a href="/top/" alt="!suck" class="top-strips" title="!suck (t)">!suck</a>
 <a href="/random/" alt="random strip" class="random" title="Random Strip (r)">.ayp me</a>
 </div><!--#nav.archive top-->
 {{/if}}
@@ -12,12 +14,20 @@
 	   <img src="{{ this.url }}" alt="{{ this.time }}" />
 	 </a>
 </div><!--#comic.archive-->
+
+<div class="strip-info">
+	<!-- Strip label goes here. Time otherwise. -->
+	<span class="label">{{ xmlDate this.time }}</span>
+</div><!--.strip-info-->
+
 {{/each}}
 </div><!--#page-->
 
 {{#if next}}
 <div id="nav" class="archive bottom">
+	<a href="/archive/" class="strip-archive" title="Strip Archive (a)">archive</a>
+	<a href="/top/" alt="!suck" class="top-strips" title="!suck (t)">!suck</a>
 	<a href="/random/" alt="random strip" class="random" title="Random Strip (r)">.ayp me</a>
-<a href="/archive/{{next.time}}/" title="Next page of strips (&rarr;)" id="next" class="nav-next">Next page of strips <i class="icon-right-open icon"></i></a>
+<a href="/archive/{{next.time}}/" title="next page of strips (&rarr;)" id="next" class="nav-next">next page of strips <i class="icon-right-open icon"></i></a>
 </div><!--#nav.archive bottom-->
 {{/if}}

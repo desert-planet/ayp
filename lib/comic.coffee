@@ -94,6 +94,12 @@ module.exports = class Comic
       @votes = res or 0
       gotVotes = true
 
+  # Fetch a comic by the @url paramater, which is the URL of the
+  # image. Does a lookup of the time, then forwards it to `Comic.at`
+  @atUrl: (url, cb) ->
+    redis.zscore @key(), url, (err, res) =>
+      return cb(err) if err
+      return Comic.at(res, cb)
 
   # Return a comic stamped at `stamp` to caller by
   # invoking callback as `cb(err, Comic)` if it is found.
@@ -101,7 +107,7 @@ module.exports = class Comic
   @at: (stamp, cb) ->
     redis.zrangebyscore [@key(), stamp, stamp], (err, res) ->
       return cb(err) if err
-      return cb("Not found") unless res.length > 0
+      return cb("Not found: #{stamp}") unless res.length > 0
 
       # If we found a comic, we'll stuff what we know about it
       # and invoke `Comic#update` and pass our callback down to it
@@ -138,6 +144,42 @@ module.exports = class Comic
         comics.push new Comic(res[i], res[i+1], saved: true)
 
       cb(undefined, comics)
+
+  # Get the `count` highest voted comics, and invoke callback as
+  # `cb(err, [Comic, ...])` where each Comic will be fully loaded
+  # as if through `Comic#at` or `Comic#atUrl`.
+  #
+  # `skip` is the number of comics to skip off the top, not actual
+  # logical pages, that's for the caller to compute.
+  #
+  # `err` would only be set on error.
+  @top: (count, skip, cb) ->
+    redis.zrevrange [@key('votes'), skip, (skip + (count - 1))], (err, urls) =>
+      return cb(err) if err
+      return cb(null, []) unless urls.length
+
+      # We'll keep the mapping to preserve order rather than going with a map
+      failed = false
+      comics = urls.map (url) -> {url: url, comic: null}
+
+      # See if all the `comics` in comics has been loaded, and we can
+      # inform the caller
+      maybeFinish = =>
+        # Return just the list of comics to the caller when we are done
+        if (comics.every (i) -> i.comic?)
+          cb(null, comics.map (c) -> c.comic)
+
+      # Set up a load by URL of every comic that we managed to get from
+      # redis's top list and fill out the right `comics[i].comic` slot
+      for comic, index in comics
+        do (comic, index) ->
+          Comic.atUrl comic.url, (err, comic) =>
+            return if failed
+            return cb((failed = true) and err) if err
+
+            # Store the comic and run completion tests after every load
+            comics[index].comic = comic
+            do maybeFinish
 
   # Invoke callback as `cb(err, {archive: [Comic, ...], next: Comic, prev: Comic}...)`
   # `err` will be set if an error is encountered.

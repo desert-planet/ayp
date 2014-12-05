@@ -21,6 +21,7 @@ cycleApp = ->
   spawnApp()
 
 handleFileChange = (filename) ->
+  return if /^\.\#/.test(filename) # Fuck a color emacs temp
   if /coffee$/.test(filename) == true
     console.log chalk.yellow 'file changed: ', filename
     console.log chalk.yellow 'cycling app'

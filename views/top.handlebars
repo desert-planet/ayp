@@ -1,0 +1,28 @@
+{{#if prevPage}}
+<div id="nav" class="archive top">
+<a href="/top/{{prevPage}}/" title="Previous page of strips (&larr;)" id="prev" class="nav-prev"><i class="icon-left-open icon"></i> Previous page of strips</a>
+<a href="/random/" alt="random strip" class="random" title="Random Strip (r)">.ayp me</a>
+</div><!--#nav.archive top-->
+{{/if}}
+
+<div id="page" class="page-archive">
+{{#each top}}
+<div id="comic" class="archive">
+	 <a href="{{ comicUrl this.time }}" title="{{ this.time }}">
+	   <img src="{{ this.url }}" alt="{{ this.time }}" />
+	 </a>
+
+	 <h4 class="top-info">
+	   <i class="icon-star"></i><span class="number-of-votes">{{ this.votes }}</span>
+	   <span class="date"> -- {{ xmlDate this.time }}</date>
+	 </h4>
+</div> <!--#comic.archive-->
+{{/each}}
+</div><!--#page-->
+
+{{#if nextPage}}
+<div id="nav" class="archive bottom">
+	<a href="/random/" alt="random strip" class="random" title="Random Strip (r)">.ayp me</a>
+<a href="/top/{{nextPage}}/" title="Next page of strips (&rarr;)" id="next" class="nav-next">Next page of strips <i class="icon-right-open icon"></i></a>
+</div><!--#nav.archive bottom-->
+{{/if}}

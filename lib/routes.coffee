@@ -22,6 +22,15 @@ app.get '/feed.xml', (request, response) ->
       layout: null
       archive: archive.archive
 
+app.get '/top/:skip?', (request, response) ->
+  failHome = -> return response.redirect('/')
+  return failHome() if isNaN(skip = parseInt(request.params.skip || 0))
+
+  perPage = 10
+  skipTotal = (skip * perPage)
+  Comic.top perPage, skipTotal, (err, comics) =>
+    return response.status(400).send JSON.stringify err: err if err
+    response.send JSON.stringify comics: comics
 
 app.get '/archive/:start?', (request, response) ->
   Comic.archive request.params.start, 10, (err, archive) =>

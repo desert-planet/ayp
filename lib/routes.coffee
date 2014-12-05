@@ -35,7 +35,7 @@ app.get '/top/:page?', (request, response) ->
   # We fetch one more than we ask for, so that we can know if we
   # have a potential next page
   Comic.top (perPage + 1), skipTotal, (err, comics) =>
-    return response.status(400).send JSON.stringify err: err if err
+    return response.redirect("/") if err
     response.render 'top',
       top: comics[0...perPage]
       page: page

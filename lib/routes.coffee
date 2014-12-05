@@ -22,15 +22,25 @@ app.get '/feed.xml', (request, response) ->
       layout: null
       archive: archive.archive
 
-app.get '/top/:skip?', (request, response) ->
+app.get '/top/:page?', (request, response) ->
   failHome = -> return response.redirect('/')
-  return failHome() if isNaN(skip = parseInt(request.params.skip || 0))
+
+  # If the page is bullshit, we go to one.
+  page = parseInt(request.params.page || 1)
+  page = 1 if isNaN(page)
 
   perPage = 10
-  skipTotal = (skip * perPage)
-  Comic.top perPage, skipTotal, (err, comics) =>
+  skipTotal = ((page - 1) * perPage)
+
+  # We fetch one more than we ask for, so that we can know if we
+  # have a potential next page
+  Comic.top (perPage + 1), skipTotal, (err, comics) =>
     return response.status(400).send JSON.stringify err: err if err
-    response.send JSON.stringify comics: comics
+    response.send JSON.stringify
+      comics: comics[0...perPage]
+      page: page
+      nextPage: if (comics[perPage..].length > 0) then page + 1
+      prevPage: if (page > 1) then page - 1
 
 app.get '/archive/:start?', (request, response) ->
   Comic.archive request.params.start, 10, (err, archive) =>

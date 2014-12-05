@@ -94,6 +94,12 @@ module.exports = class Comic
       @votes = res or 0
       gotVotes = true
 
+  # Fetch a comic by the @url paramater, which is the URL of the
+  # image. Does a lookup of the time, then forwards it to `Comic.at`
+  @atUrl: (url, cb) ->
+    redis.zscore @key(), url, (err, res) =>
+      return cb(err) if err
+      return Comic.at(res, cb)
 
   # Return a comic stamped at `stamp` to caller by
   # invoking callback as `cb(err, Comic)` if it is found.
@@ -101,7 +107,7 @@ module.exports = class Comic
   @at: (stamp, cb) ->
     redis.zrangebyscore [@key(), stamp, stamp], (err, res) ->
       return cb(err) if err
-      return cb("Not found") unless res.length > 0
+      return cb("Not found: #{stamp}") unless res.length > 0
 
       # If we found a comic, we'll stuff what we know about it
       # and invoke `Comic#update` and pass our callback down to it

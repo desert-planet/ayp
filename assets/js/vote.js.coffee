@@ -2,14 +2,12 @@ $ ->
   $('.vote').on 'click', (event) ->
     do event.preventDefault
     $this = $(this)
+    $counter = $('.number-of-votes') # TODO: Scope the search to $this
+
     return unless (comicID = $this.data 'id')
-    $counter = $('.number-of-votes')
     count = parseInt $counter.text()
     count = 0 if isNaN(count)
 
-    console.log "Vote on: #{comicID} with #{count} votes so far"
-
-    # TODO: Make a call, then on success
     $.ajax "/vote/#{comicID}/",
       type: 'POST'
       headers: {'Content-Type': 'application/json'}

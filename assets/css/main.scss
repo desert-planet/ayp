@@ -199,12 +199,16 @@ body { height: 100%; }
 }
 
 .strip-info .votes {
-	margin-right: 10px;
+	margin-left: 5px;
 }
 
 .strip-info .label {
 	color: #777;
 }
+
+.strip-info a.vote { color: black; font-weight: normal; margin-left: 5px; }
+
+.strip-info a.vote:hover { color: orange; }
 
 #nav {
 	text-align: center;
@@ -238,9 +242,6 @@ body { height: 100%; }
 	as well as a lack of a "previous" on the first page of
 	the comic archive, should you ever see it. */
 }
-
-.nav-next { margin-left: 0px !important; }
-.nav-prev { margin-right: 0px !important; }
 
 #footer {
 	position: absolute;

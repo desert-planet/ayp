@@ -36,8 +36,8 @@ app.get '/top/:page?', (request, response) ->
   # have a potential next page
   Comic.top (perPage + 1), skipTotal, (err, comics) =>
     return response.status(400).send JSON.stringify err: err if err
-    response.send JSON.stringify
-      comics: comics[0...perPage]
+    response.render 'top',
+      top: comics[0...perPage]
       page: page
       nextPage: if (comics[perPage..].length > 0) then page + 1
       prevPage: if (page > 1) then page - 1

@@ -429,10 +429,11 @@ html {
 
 // AJAX-triggering links will have this class
 // applied briefly after an error or success
-.strip-info a.failed {
+
+.strip-info a.failed, .strip-info a.failed:hover {
   color: red;
 }
 
-.strip-info a.succeeded {
+.strip-info a.succeeded, .strip-info a.succeeded:hover {
   color: green;
 }

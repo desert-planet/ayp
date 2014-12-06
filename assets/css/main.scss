@@ -429,10 +429,10 @@ html {
 
 // AJAX-triggering links will have this class
 // applied briefly after an error or success
-a.failed {
+.strip-info a.failed {
   color: red;
 }
 
-a.succeeded {
+.strip-info a.succeeded {
   color: green;
 }

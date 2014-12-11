@@ -7,6 +7,9 @@ app = require './app'
 Comic = require './comic'
 
 ## Application routes
+app.get '/dickbutt', (request, response) ->
+  response.redirect('/static/db.jpg')
+
 app.get '/', (request, response) ->
   Comic.latest (err, comic) =>
     # TODO: Better error handling

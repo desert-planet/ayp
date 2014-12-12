@@ -10,6 +10,9 @@ Comic = require './comic'
 app.get '/dickbutt', (request, response) ->
   response.redirect('/static/db.jpg')
 
+app.get '/dkb', (request, response) ->
+  response.redirect('/dickbutt')
+
 app.get '/', (request, response) ->
   Comic.latest (err, comic) =>
     # TODO: Better error handling

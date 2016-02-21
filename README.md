@@ -1,6 +1,6 @@
 ## All Your Pants [![Build Status](https://travis-ci.org/desert-planet/ayp.svg?branch=master)](https://travis-ci.org/desert-planet/ayp)
 
-The website behind the robot behind the legend behind the nonsense.
+[The website](http://ayp.wtf.cat/) behind [the robot](https://github.com/desert-planet/hayt) behind the [legend](http://wtf.cat/) behind the nonsense.
 
 ![woosh](http://s3.amazonaws.com/ayp/ayp-1416892364734.jpg)
 

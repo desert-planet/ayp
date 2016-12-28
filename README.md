@@ -2,7 +2,7 @@
 
 [The website](http://ayp.wtf.cat/) behind [the robot](https://github.com/desert-planet/hayt) behind the [legend](http://wtf.cat/) behind the nonsense.
 
-![woosh](http://s3.amazonaws.com/ayp/ayp-1416892364734.jpg)
+![eat this](http://s3.amazonaws.com/ayp/ayp-1482950774675.jpg)
 
 Gods help us all.
 

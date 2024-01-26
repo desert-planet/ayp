@@ -34,6 +34,14 @@ app.engine 'handlebars', handlebars
     comicUrl: (at) -> "/at/#{at}/"
     baseUrl: -> "http://ayp.wtf.cat" # TODO: Switch on development mode
     xmlDate: (at) -> (new Date(parseInt(at))).toUTCString()
+    banner: ->
+      ads = [
+        '<a href="http://amongthechosen.com/" title="Among the Chosen"><img alt="Ad for Among the Chosen" src="/static/images/ayp_atc.jpg"></a>',
+        '<a href="http://19teeth.org/" title="19 Tooth Foundation"><img alt="Ad for 19 Tooth Foundation" src="/static/images/ayp_19t.jpg"></a>',
+      ]
+      ad = if Math.random() > 0.5 then ads[0] else ads[1]
+      return ad
+
 
 # View, static, and LESS paths on disk
 app.set 'views', path.resolve(APP_ROOT, 'views')

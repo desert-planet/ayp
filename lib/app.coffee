@@ -38,10 +38,9 @@ app.engine 'handlebars', handlebars
       ads = [
         '<a href="http://amongthechosen.com/" title="Among the Chosen"><img alt="Ad for Among the Chosen" src="/static/images/ayp_atc.jpg"></a>',
         '<a href="http://19teeth.org/" title="19 Tooth Foundation"><img alt="Ad for 19 Tooth Foundation" src="/static/images/ayp_19t.jpg"></a>',
-		'<a href="https://www.youtube.com/channel/UCke_95iHaMHXxzD13TpCR4Q" title="Arctic Taco Gaming"><img alt="Ad for Arctic Taco Gaming" src="/static/images/ayp_atg.png"></a>',
+        '<a href="https://www.youtube.com/channel/UCke_95iHaMHXxzD13TpCR4Q" title="Arctic Taco Gaming"><img alt="Ad for Arctic Taco Gaming" src="/static/images/ayp_atg.png"></a>',
       ]
-      #ad = if Math.random() > 0.5 then ads[0] else ads[1]
-	  ad = ads[Math.floor(math.random()*3)]
+      ad = ads[Math.floor(math.random()*ads.length)]
       return ad
 
 

@@ -40,7 +40,7 @@ app.engine 'handlebars', handlebars
         '<a href="http://19teeth.org/" title="19 Tooth Foundation"><img alt="Ad for 19 Tooth Foundation" src="/static/images/ayp_19t.jpg"></a>',
         '<a href="https://www.youtube.com/channel/UCke_95iHaMHXxzD13TpCR4Q" title="Arctic Taco Gaming"><img alt="Ad for Arctic Taco Gaming" src="/static/images/ayp_atg.png"></a>',
       ]
-      ad = ads[Math.floor(math.random()*ads.length)]
+      ad = ads[Math.floor(Math.random()*ads.length)]
       return ad
 
 
